@@ -7,7 +7,7 @@
 [ext_resource path="res://animations/Parallax.tres" type="Animation" id=5]
 [ext_resource path="res://animations/FadeIn.tres" type="Animation" id=6]
 [ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/schriftzug.png" type="Texture" id=8]
+[ext_resource path="res://assets/title.png" type="Texture" id=8]
 
 [sub_resource type="Gradient" id=1]
 
@@ -34,7 +34,7 @@ resource_name = "titleIDLE"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("schriftzug:frame")
+tracks/0/path = NodePath("title:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -110,7 +110,7 @@ margin_right = 175.0
 margin_bottom = -151.0
 btnText = "Play"
 
-[node name="schriftzug" type="Sprite" parent="Cam/GUI"]
+[node name="title" type="Sprite" parent="Cam/GUI"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 370, 960 )
 scale = Vector2( 6.64939, 6.64939 )
