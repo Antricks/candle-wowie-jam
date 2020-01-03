@@ -18,7 +18,6 @@ func _ready():
 
 func _process(delta):
 	$Sprite.flip_h = Input.is_action_pressed(\"left\");
-
 	
 func _physics_process(delta):
 	var axis = get_input_axis()
@@ -43,7 +42,8 @@ func apply_fricition(amount):
 		
 func apply_movement(acceleration):
 	motion += acceleration
-	motion = motion.clamped(MAX_SPEED)"
+	motion = motion.clamped(MAX_SPEED)
+"
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 9.25604

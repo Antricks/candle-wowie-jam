@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
 [ext_resource path="res://tilesets/ProgrammedTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/lantern1_animated.png-948725328ab6ccc586b24880b0825691.stex"
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -23,7 +24,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 0, 2, 1, 2, 1, 2, 0, 2, 0, 1, 0, 2, 1, 2, 1, 2, 1, 0, 1, 0, 2, 1, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 2.22562, 1.752 )
 
 [node name="Node2D" type="Node2D"]
@@ -63,15 +64,19 @@ scale = Vector2( 3.75844, 3.75844 )
 [node name="Sprite" type="Sprite" parent="YSort/StaticBody2D"]
 position = Vector2( 0.593127, -11.8668 )
 z_as_relative = false
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/StaticBody2D/Sprite"]
-anims/flicker = SubResource( 3 )
+anims/flicker = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/StaticBody2D"]
 position = Vector2( 0.15538, -1.07022 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
+
+[node name="Door" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1226.51, 448.065 )
+scale = Vector2( 4, 4 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
