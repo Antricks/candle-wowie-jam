@@ -100,6 +100,7 @@ anims/Wackeln = ExtResource( 5 )
 anims/FadeIn = ExtResource( 6 )
 
 [node name="PlayButton" parent="Cam/GUI" instance=ExtResource( 7 )]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -110,15 +111,19 @@ margin_right = 175.0
 margin_bottom = -151.0
 btnText = "Play"
 
+[node name="Label" parent="Cam/GUI/PlayButton" index="0"]
+self_modulate = Color( 1, 1, 1, 0 )
+
 [node name="title" type="Sprite" parent="Cam/GUI"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 370, 960 )
+position = Vector2( 512, 100 )
 scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
-offset = Vector2( 24.1603, -130.39 )
 vframes = 15
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI"]
 anims/titleIDLE = SubResource( 4 )
 [connection signal="animation_finished" from="Cam/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="Cam/GUI/PlayButton"]
