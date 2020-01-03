@@ -18,6 +18,7 @@ func _ready():
 
 func _process(delta):
 	$Sprite.flip_h = Input.is_action_pressed(\"left\");
+
 	
 func _physics_process(delta):
 	var axis = get_input_axis()
@@ -111,11 +112,11 @@ tracks/0/keys = {
 script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.483974, -18.5093 )
+position = Vector2( 0.484009, -18.5093 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.217635, -35.5402 )
+position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, 2 )

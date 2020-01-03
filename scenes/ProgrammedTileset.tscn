@@ -15,7 +15,7 @@ func _ready():
 position = Vector2( 12.461, 12.8039 )
 texture = ExtResource( 1 )
 hframes = 4
-frame = 1
+frame = 3
 script = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
