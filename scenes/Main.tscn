@@ -53,6 +53,7 @@ tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 163.768, 59.2753 )
+MULTIPLIER = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 150, 350 )
