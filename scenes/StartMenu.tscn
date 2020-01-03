@@ -112,12 +112,11 @@ btnText = "Play"
 
 [node name="title" type="Sprite" parent="Cam/GUI"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 370, 960 )
+position = Vector2( 512, 100 )
 scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
-offset = Vector2( 24.1603, -130.39 )
 vframes = 15
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI"]
 anims/titleIDLE = SubResource( 4 )
