@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="Candle"
 run/main_scene="res://scenes/StartMenu.tscn"
+config/icon="res://assets/effectTile.png"
 
 [display]
 
