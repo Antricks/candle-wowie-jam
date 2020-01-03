@@ -1,7 +1,8 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Flammen-Charakter.png" type="Texture" id=1]
-[ext_resource path="res://shader/Glitch.shader" type="Shader" id=2]
+[ext_resource path="res://animations/player_idle.tres" type="Animation" id=2]
+[ext_resource path="res://shader/Glitch.shader" type="Shader" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -18,7 +19,6 @@ func _ready():
 func _process(delta):
 	$Sprite.flip_h = Input.is_action_pressed(\"left\");
 	
-
 func _physics_process(delta):
 	var axis = get_input_axis()
 	if axis == Vector2.ZERO:
@@ -48,23 +48,6 @@ func apply_movement(acceleration):
 radius = 9.25604
 height = 27.8974
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
-length = 0.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 4 ]
-}
-
 [sub_resource type="Animation" id=4]
 resource_name = "hover"
 length = 2.0
@@ -83,7 +66,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 2 )
+shader = ExtResource( 3 )
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0 )
@@ -133,13 +116,13 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.217635, -35.5402 )
-scale = Vector2( 3.92965, 3.92965 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, 2 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/idle = SubResource( 3 )
+anims/idle = ExtResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
 anims/hover = SubResource( 4 )

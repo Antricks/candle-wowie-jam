@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/Tileset1.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
+[ext_resource path="res://tilesets/ProgrammedTileset.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
@@ -51,9 +52,15 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 163.768, 59.2753 )
-MULTIPLIER = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 150, 350 )
