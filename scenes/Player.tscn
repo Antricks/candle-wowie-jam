@@ -43,6 +43,10 @@ func apply_fricition(amount):
 func apply_movement(acceleration):
 	motion += acceleration
 	motion = motion.clamped(MAX_SPEED)
+
+
+func _on_Player_tree_entered():
+	Global.playerNodePath = \"/root/\" + get_tree().root.get_path_to(self)
 "
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -156,3 +160,4 @@ color = Color( 0, 0, 0, 0 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/OverlayColorRect"]
 anims/fade_in = SubResource( 7 )
 anims/fade_out = SubResource( 8 )
+[connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
