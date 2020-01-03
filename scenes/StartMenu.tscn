@@ -110,6 +110,7 @@ margin_top = -265.0
 margin_right = 175.0
 margin_bottom = -151.0
 btnText = "Play"
+functionToDo = "get_tree().change_scene(\"res://scenes/Main.tscn\")"
 
 [node name="Label" parent="Cam/GUI/PlayButton" index="0"]
 self_modulate = Color( 1, 1, 1, 0 )
