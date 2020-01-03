@@ -1,6 +1,17 @@
-[gd_resource type="TileSet" load_steps=2 format=2]
+[gd_resource type="TileSet" load_steps=6 format=2]
 
 [ext_resource path="res://assets/Flammen-Charakter.png" type="Texture" id=1]
+[ext_resource path="res://shader/Glitch.shader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
 [resource]
 0/name = "Sprite"
@@ -13,3 +24,14 @@
 0/navigation_offset = Vector2( 8, 8 )
 0/shapes = [  ]
 0/z_index = 0
+1/name = "ShaderSprite"
+1/texture = SubResource( 6 )
+1/tex_offset = Vector2( 0, 0 )
+1/material = SubResource( 4 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 1380, 800 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 690, 400 )
+1/navigation_offset = Vector2( 690, 400 )
+1/shapes = [  ]
+1/z_index = 4096
