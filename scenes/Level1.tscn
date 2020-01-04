@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
+[ext_resource path="res://tilesets/ProgrammedTileset.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMapFloor" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="ySort" type="YSort" parent="."]
+
+[node name="TileMapWalls" type="TileMap" parent="ySort"]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 65541, 0, 0, 131077, 0, 0 )
+
+[node name="TileMap" type="TileMap" parent="ySort"]
+scale = Vector2( 4, 4 )
+mode = 1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="Door" parent="ySort" instance=ExtResource( 3 )]
+position = Vector2( 351.803, 128.058 )
+scale = Vector2( 4, 4 )
+scene_to_change_to = "res://scenes/Main.tscn"
+
+[node name="TileMapOverlay" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+z_index = 4095
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_friction = 0.0
+collision_layer = 0
+collision_mask = 0
+format = 1
+
+[node name="TileMapOverlayShifted" type="TileMap" parent="."]
+position = Vector2( 0, -32 )
+scale = Vector2( 4, 4 )
+z_index = 4095
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 0
+collision_mask = 0
+format = 1
