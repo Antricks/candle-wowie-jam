@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends CanvasLayer
+
+signal scene_changed();
+
+onready var animation_player = $ColorRect/AnimationPlayer;
+
+func change_scene(path, delay = 1.5):
+	yield(get_tree().create_timer(delay), \"timeout\");
+	animation_player.play(\"fade\");
+	yield(animation_player, \"animation_finished\");
+	get_tree().change_scene(path);
+	animation_player.play_backwards(\"fade\");
+	emit_signal(\"scene_changed\");
+"
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="SceneChanger" type="CanvasLayer"]
+script = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -181.852
+margin_top = -110.687
+margin_right = 1204.15
+margin_bottom = 708.313
+color = Color( 0, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+anims/fade = SubResource( 1 )

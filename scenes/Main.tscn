@@ -65,6 +65,7 @@ tile_data = PoolIntArray( -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 
 position = Vector2( 354.638, 228.597 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort"]
+editor/display_folded = true
 position = Vector2( 64.8881, 435.3 )
 scale = Vector2( 3.75844, 3.75844 )
 script = SubResource( 4 )
@@ -85,7 +86,7 @@ shape = SubResource( 3 )
 [node name="Door" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1119.97, 448.065 )
 scale = Vector2( 4, 4 )
-scene_to_change_to = "res://scenes/Level1.tscn"
+scene_path = "res://scenes/Level1.tscn"
 
 [node name="Glibber" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 475.428, 382.649 )
