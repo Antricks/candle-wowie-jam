@@ -16,11 +16,6 @@ onready var targetNodePath = Global.playerNodePath
 func set_target(target):
 	targetNodePath = target;
 
-func shoot():
-	var projectile = bullet.instance()
-	self.add_child(projectile)
-	$Sprite/AnimationPlayer.play(\"shoot\");
-
 func _process(delta):
 	$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
 	pass
@@ -28,14 +23,18 @@ func _process(delta):
 func _on_MoveTimer_timeout():
 	$Sprite/AnimationPlayer2.play_backwards(\"fade_alpha\");
 	yield($Sprite/AnimationPlayer2, \"animation_finished\");
-	#var final = position.direction_to($\"/root/Global\".get_saved_player_position())
-	#$Tween.interpolate_property(self, \"position\", position, final, 0.5, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
-	#$Tween.start()
 	position = $\"/root/Global\".get_saved_player_position();
-	$Sprite/AnimationPlayer2.play(\"fade_alpha\");"
+	$Sprite/AnimationPlayer.play(\"grab\");
+	$Sprite/AnimationPlayer2.play(\"fade_alpha\");
+
+func _on_Area2D_body_entered(body):
+	if body.has_method(\"_on_hit\"):
+		body._on_hit();
+"
 
 [sub_resource type="Animation" id=2]
-resource_name = "shoot"
+resource_name = "grab"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -43,14 +42,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 0 ]
+"values": [ 1, 0 ]
 }
 
 [sub_resource type="Animation" id=3]
 resource_name = "fade_alpha"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -58,43 +58,45 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 5.18734
+radius = 3.49351
 
 [node name="GhostHand" type="KinematicBody2D"]
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.196078 )
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -1 )
 texture = ExtResource( 1 )
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/shoot = SubResource( 2 )
+anims/grab = SubResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
 anims/fade_alpha = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0.535849, 0 )
+position = Vector2( 0.0871261, -0.358978 )
+scale = Vector2( 0.799999, 0.8 )
 shape = SubResource( 4 )
 
-[node name="ShootTimer" type="Timer" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.0871261, -0.358978 )
+shape = SubResource( 4 )
+
+[node name="MoveTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
-[node name="MoveTimer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
 [node name="Tween" type="Tween" parent="."]
-[connection signal="timeout" from="ShootTimer" to="." method="shoot"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

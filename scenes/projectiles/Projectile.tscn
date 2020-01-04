@@ -23,6 +23,7 @@ func _on_LifeTimer_timeout():
 func _on_Area2D_body_entered(body):
 	if body.has_method(\"_on_shot\"):
 		body._on_shot();
+		self.replace_by(null);
 "
 
 [sub_resource type="CircleShape2D" id=2]

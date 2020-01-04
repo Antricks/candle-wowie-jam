@@ -7,13 +7,6 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -407.701
-margin_top = -504.586
-margin_right = 1450.3
-margin_bottom = 1012.41
-color = Color( 0, 0, 0, 1 )
-
 [node name="TileMapFloor" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
