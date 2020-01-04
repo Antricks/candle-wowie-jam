@@ -1,22 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
-[ext_resource path="res://tilesets/ProgrammedTileset.tres" type="TileSet" id=2]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemies/Glibber.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=4]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
 
 func _ready():
 	$Sprite/AnimationPlayer.play(\"flicker\");
 "
 
-[sub_resource type="StreamTexture" id=1]
+[sub_resource type="StreamTexture" id=2]
 load_path = "res://.import/lantern1_animated.png-948725328ab6ccc586b24880b0825691.stex"
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -32,7 +31,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 0, 2, 1, 2, 1, 2, 0, 2, 0, 1, 0, 2, 1, 2, 1, 2, 1, 0, 1, 0, 2, 1, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 2.22562, 1.752 )
 
 [node name="Node2D" type="Node2D"]
@@ -53,43 +52,35 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0 )
 
-[node name="TileMap" type="TileMap" parent="YSort"]
-scale = Vector2( 4, 4 )
-mode = 1
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 16, 16 )
-format = 1
-tile_data = PoolIntArray( -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0 )
-
-[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 221.243, 394.528 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort"]
 editor/display_folded = true
 position = Vector2( 64.8881, 435.3 )
 scale = Vector2( 3.75844, 3.75844 )
-script = SubResource( 4 )
+script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="YSort/StaticBody2D"]
 position = Vector2( 0.593127, -11.8668 )
 z_as_relative = false
-texture = SubResource( 1 )
+texture = SubResource( 2 )
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/StaticBody2D/Sprite"]
-anims/flicker = SubResource( 2 )
+anims/flicker = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/StaticBody2D"]
 position = Vector2( 0.15538, -1.07022 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
-[node name="Door" parent="YSort" instance=ExtResource( 4 )]
+[node name="Door" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 1119.97, 448.065 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/Level1.tscn"
 position_goal = Vector2( 360, 110 )
 
-[node name="Glibber" parent="YSort" instance=ExtResource( 5 )]
+[node name="Glibber" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 475.428, 382.649 )
 scale = Vector2( 5, 5 )
 

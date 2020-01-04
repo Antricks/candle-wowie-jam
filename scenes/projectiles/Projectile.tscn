@@ -10,7 +10,6 @@ var velocity = Vector2()
 
 onready var target = get_node(get_parent().targetNodePath)
 
-
 func _ready():
 	look_at(target.position)
 

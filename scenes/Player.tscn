@@ -31,7 +31,7 @@ func _physics_process(delta):
 	else:
 		apply_movement(axis * ACCELERATION * delta)
 	motion = move_and_slide(motion * MULTIPLIER)
-	$\"/root/Global\".save_player_position(position);
+
 
 func get_input_axis():
 	var axis = Vector2.ZERO
@@ -52,6 +52,10 @@ func apply_movement(acceleration):
 
 func _on_Player_tree_entered():
 	Global.playerNodePath = \"/root/\" + get_tree().root.get_path_to(self)
+
+
+func _on_SavePositionTimer_timeout():
+	$\"/root/Global\".save_player_position(position);
 "
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -121,4 +125,9 @@ z_index = 4096
 texture = SubResource( 6 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1380, 800 )
+
+[node name="SavePositionTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
+[connection signal="timeout" from="SavePositionTimer" to="." method="_on_SavePositionTimer_timeout"]
