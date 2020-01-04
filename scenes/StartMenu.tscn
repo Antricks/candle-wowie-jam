@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/BGdark.png" type="Texture" id=2]
@@ -29,12 +29,21 @@ linear_accel = 7.27
 radial_accel = -2.42
 scale = 0.1
 
+[sub_resource type="GDScript" id=6]
+script/source = "extends Sprite
+
+onready var animation_player = $AnimationPlayer2
+
+func _on_PlayButton_play_pressed():
+	animation_player.play(\"titlePLAY\");
+"
+
 [sub_resource type="Animation" id=4]
 resource_name = "titleIDLE"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("title:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -44,6 +53,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 4 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "titlePLAY"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3, 14 ]
 }
 
 [node name="StartMenu" type="Node2D"]
@@ -100,7 +125,7 @@ anims/Wackeln = ExtResource( 5 )
 anims/FadeIn = ExtResource( 6 )
 
 [node name="PlayButton" parent="Cam/GUI" instance=ExtResource( 7 )]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0.586777 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -110,21 +135,24 @@ margin_top = -265.0
 margin_right = 175.0
 margin_bottom = -151.0
 btnText = "Play"
-functionToDo = "get_tree().change_scene(\"res://scenes/Main.tscn\")"
+functionToDo = "yield(get_tree().create_timer(2), \"timeout\"); get_tree().change_scene(\"res://scenes/Main.tscn\")"
 
 [node name="Label" parent="Cam/GUI/PlayButton" index="0"]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0.28125 )
 
 [node name="title" type="Sprite" parent="Cam/GUI"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.995465 )
 position = Vector2( 512, 100 )
 scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
 vframes = 15
-frame = 1
+frame = 14
+script = SubResource( 6 )
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI"]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/title"]
 anims/titleIDLE = SubResource( 4 )
+anims/titlePLAY = SubResource( 5 )
 [connection signal="animation_finished" from="Cam/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="play_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/title" method="_on_PlayButton_play_pressed"]
 
 [editable path="Cam/GUI/PlayButton"]
