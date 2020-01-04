@@ -11,11 +11,15 @@ export (int) var MAX_SPEED = 250;
 export (int) var ACCELERATION = 4000;
 export (int) var MULTIPLIER = 1;
 export (Vector2) var motion = Vector2();
-	
+
+var transitioning = false;
+
 func _ready():
 	$Sprite/AnimationPlayer.play(\"idle\");
 	$Sprite/AnimationPlayer2.play(\"hover\");
 	$\"/root/Global\".register_player(self);
+	position = $\"/root/Global\".get_saved_player_init_position();
+	transitioning = false;
 
 func _process(delta):
 	$Sprite.flip_h = Input.is_action_pressed(\"left\");
@@ -27,7 +31,7 @@ func _physics_process(delta):
 	else:
 		apply_movement(axis * ACCELERATION * delta)
 	motion = move_and_slide(motion * MULTIPLIER)
-
+	$\"/root/Global\".save_player_position(position);
 
 func get_input_axis():
 	var axis = Vector2.ZERO

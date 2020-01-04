@@ -9,7 +9,8 @@ func open():
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":
 		open()
+		$"/root/Global".save_player_init_position(position_goal);
 		$"/root/SceneChanger".change_scene(scene_path, 0);
 		yield($"/root/SceneChanger".animation_player, "animation_finished");
 		yield(get_tree().create_timer(0.2), "timeout");
-		$"/root/Global".player_node.position = position_goal;
+

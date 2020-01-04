@@ -34,9 +34,10 @@ format = 1
 position = Vector2( 353.668, 0.258492 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/Main.tscn"
+position_goal = Vector2( 1125, 560 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 358.233, 111.581 )
+position = Vector2( 360, 110 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )

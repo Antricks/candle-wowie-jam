@@ -13,6 +13,8 @@ export var speed : int = 50
 
 onready var targetNodePath = Global.playerNodePath
 
+func set_target(target):
+	targetNodePath = target;
 
 func shoot():
 	var projectile = bullet.instance()
