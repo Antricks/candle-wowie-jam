@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
 [ext_resource path="res://tilesets/ProgrammedTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemies/Glibber.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/lantern1_animated.png-948725328ab6ccc586b24880b0825691.stex"
@@ -80,10 +79,6 @@ position = Vector2( 1120.13, 448.003 )
 scale = Vector2( 4, 4 )
 scene_to_change_to = "res://scenes/Level1.tscn"
 position_to_get_to = Vector2( 1120, 570 )
-
-[node name="Glibber" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 475.428, 382.649 )
-scale = Vector2( 5, 5 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )

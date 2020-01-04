@@ -21,11 +21,12 @@ func transition(var position_to_get_to, var scene_to_change_to):
 	$Camera2D/OverlayColorRect/AnimationPlayer.play(\"fade_in\");
 	get_tree().change_scene(scene_to_change_to);
 	position = position_to_get_to;
-	get_tree().root.add_child(get_parent());
+	get_tree().root.add_child($\"/root/Global\".player);
 	
 func _ready():
 	$Sprite/AnimationPlayer.play(\"idle\");
 	$Sprite/AnimationPlayer2.play(\"hover\");
+	$\"/root/Global\".registerPlayer(self);
 
 func _process(delta):
 	if Input.is_action_pressed(\"right\") || Input.is_action_pressed(\"left\"):
