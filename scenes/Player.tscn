@@ -12,25 +12,18 @@ export (int) var ACCELERATION = 4000;
 export (int) var MULTIPLIER = 1;
 export (Vector2) var motion = Vector2();
 
-onready var AnimationPlayerOverlay = $Camera2D/OverlayColorRect/AnimationPlayer;
-
-func Player(var position_to_get_to):
-	pass
-
-func transition(var position_to_get_to, var scene_to_change_to):
-	$Camera2D/OverlayColorRect/AnimationPlayer.play(\"fade_in\");
+func transition(position_to_go_to, scene_to_change_to):
+	var playerNode = get_tree().root.get_node($\"/root/Global\".playerNodePath);
 	get_tree().change_scene(scene_to_change_to);
-	position = position_to_get_to;
-	get_tree().root.add_child($\"/root/Global\".player);
+	position = position_to_go_to;
+	get_tree().root.add_child(playerNode);
 	
 func _ready():
 	$Sprite/AnimationPlayer.play(\"idle\");
 	$Sprite/AnimationPlayer2.play(\"hover\");
-	$\"/root/Global\".registerPlayer(self);
 
 func _process(delta):
-	if Input.is_action_pressed(\"right\") || Input.is_action_pressed(\"left\"):
-		$Sprite.flip_h = Input.is_action_pressed(\"left\");
+	$Sprite.flip_h = Input.is_action_pressed(\"left\");
 	
 func _physics_process(delta):
 	var axis = get_input_axis()
