@@ -17,7 +17,7 @@ func set_target(target):
 	targetNodePath = target;
 
 func _process(delta):
-	$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
+
 	pass
 
 func _on_MoveTimer_timeout():
@@ -25,9 +25,12 @@ func _on_MoveTimer_timeout():
 	yield($Sprite/AnimationPlayer2, \"animation_finished\");
 	position = $\"/root/Global\".get_saved_player_position();
 	$Sprite/AnimationPlayer.play(\"grab\");
+	$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
 	$Sprite/AnimationPlayer2.play(\"fade_alpha\");
 
 func _on_Area2D_body_entered(body):
+	if body.has_method(\"_is_projectile\"):
+		self.remove_and_skip();
 	if body.has_method(\"_on_hit\"):
 		body._on_hit();
 "
@@ -63,6 +66,16 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 3.49351
@@ -71,9 +84,9 @@ radius = 3.49351
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -1 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -1 )
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
