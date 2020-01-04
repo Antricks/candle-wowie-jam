@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/BGdark.png" type="Texture" id=2]
@@ -28,6 +28,21 @@ orbit_velocity_random = 0.0
 linear_accel = 7.27
 radial_accel = -2.42
 scale = 0.1
+
+[sub_resource type="Animation" id=7]
+resource_name = "ButtonPLAY"
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayButton:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="GDScript" id=4]
 script/source = "extends Sprite
@@ -120,6 +135,7 @@ anims/Wackeln = ExtResource( 5 )
 [node name="GUI" type="CanvasLayer" parent="Cam"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cam/GUI"]
+anims/ButtonPLAY = SubResource( 7 )
 anims/FadeIn = ExtResource( 6 )
 
 [node name="PlayButton" parent="Cam/GUI" instance=ExtResource( 7 )]
@@ -144,7 +160,7 @@ position = Vector2( 512, 100 )
 scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
 vframes = 15
-frame = 14
+frame = 3
 script = SubResource( 4 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/title"]
