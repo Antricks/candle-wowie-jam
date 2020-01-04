@@ -6,10 +6,10 @@
 script/source = "extends KinematicBody2D
 
 var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
+var alive = true;
 
 export var lifes : int = 3
 export var speed : int = 50
-
 
 onready var targetNodePath = Global.playerNodePath
 
@@ -17,22 +17,27 @@ func set_target(target):
 	targetNodePath = target;
 
 func _process(delta):
-
 	pass
 
 func _on_MoveTimer_timeout():
-	$Sprite/AnimationPlayer2.play_backwards(\"fade_alpha\");
-	yield($Sprite/AnimationPlayer2, \"animation_finished\");
-	position = $\"/root/Global\".get_saved_player_position();
-	$Sprite/AnimationPlayer.play(\"grab\");
-	$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
-	$Sprite/AnimationPlayer2.play(\"fade_alpha\");
+	if alive:
+		$Sprite/AnimationPlayer2.play_backwards(\"fade_alpha\");
+		yield($Sprite/AnimationPlayer2, \"animation_finished\");
+		position = $\"/root/Global\".get_saved_player_position();
+		$Sprite/AnimationPlayer.play(\"grab\");
+		$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
+		$Sprite/AnimationPlayer2.play(\"fade_alpha\");
 
 func _on_Area2D_body_entered(body):
-	if body.has_method(\"_is_projectile\"):
-		self.remove_and_skip();
-	if body.has_method(\"_on_hit\"):
-		body._on_hit();
+	if alive:
+		if body.has_method(\"_on_hit\"):
+			body._on_hit();
+
+func _on_shot():
+	alive = false;
+	$Sprite/AnimationPlayer2.play_backwards(\"fade_alpha\");
+	yield($Sprite/AnimationPlayer2, \"animation_finished\");
+	self.queue_free();
 "
 
 [sub_resource type="Animation" id=2]
@@ -78,13 +83,14 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 3.49351
+radius = 13.6054
 
 [node name="GhostHand" type="KinematicBody2D"]
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -1 )
 vframes = 2
@@ -97,13 +103,14 @@ anims/fade_alpha = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.0871261, -0.358978 )
-scale = Vector2( 0.799999, 0.8 )
+scale = Vector2( 0.799999, 1.56 )
 shape = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0.0871261, -0.358978 )
+scale = Vector2( 1, 1.92 )
 shape = SubResource( 4 )
 
 [node name="MoveTimer" type="Timer" parent="."]

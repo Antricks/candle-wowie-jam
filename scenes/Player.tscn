@@ -7,12 +7,15 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
+var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
+
 export (int) var MAX_SPEED = 250;
 export (int) var ACCELERATION = 4000;
 export (int) var MULTIPLIER = 1;
 export (Vector2) var motion = Vector2();
 
 var transitioning = false;
+var able_to_shoot = true;
 
 func _ready():
 	$Sprite/AnimationPlayer.play(\"idle\");
@@ -63,8 +66,28 @@ func _on_hit():
 	print(\"hit\");
 	handle_damage();
 
+func shoot(goal):
+	able_to_shoot = false;
+	var projectile = bullet.instance();
+	projectile.friendly = true;
+	projectile.scale = Vector2(2,2);
+	projectile.position = position+Vector2(0,-32);
+	projectile.set_target_position(goal);
+	self.get_parent().add_child(projectile);
+
+func _input(event):
+	# Mouse in viewport coordinates
+	if Input.is_action_just_pressed(\"l_mouse_click\"):
+		var game_field_position = (position-Vector2(512,300))+get_viewport().get_mouse_position()
+		if able_to_shoot:
+			shoot(game_field_position);
+		
 func handle_damage():
-	pass"
+	pass
+
+func _on_AbleToShootTimer_timeout():
+	able_to_shoot = true;
+"
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 9.25604
@@ -144,8 +167,15 @@ texture = SubResource( 6 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1380, 800 )
 
+[node name="Position2D" type="Position2D" parent="Camera2D"]
+position = Vector2( -512, -300 )
+
 [node name="SavePositionTimer" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 1.2
+autostart = true
+
+[node name="AbleToShootTimer" type="Timer" parent="."]
 autostart = true
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
 [connection signal="timeout" from="SavePositionTimer" to="." method="_on_SavePositionTimer_timeout"]
+[connection signal="timeout" from="AbleToShootTimer" to="." method="_on_AbleToShootTimer_timeout"]

@@ -1,7 +1,7 @@
 [gd_resource type="Animation" format=2]
 
 [resource]
-resource_name = "FadeIn"
+resource_name = "fadeIn"
 length = 10.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("title:modulate")
@@ -22,7 +22,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.4, 3 ),
+"times": PoolRealArray( 0, 0.8, 3 ),
 "transitions": PoolRealArray( -2, -2, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]

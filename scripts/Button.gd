@@ -15,14 +15,15 @@ func _on_Button_pressed():
 	elif functionToDo != "":
 		callFunction(functionToDo)	
 	emit_signal("btn_pressed");
-	
-func callFunction(fnc):
+
+func callFunction(fnc, env = null):
 	var script = GDScript.new()
 	script.set_source_code("extends Node\n\nfunc run():\n\t" + fnc)
 	script.reload()
 	
 	var obj = Node.new()
-	obj.set_name("sciptCaller")
-	add_child(obj)
+	obj.set_name("scriptCaller")
+	get_parent().add_child(obj)
 	obj.set_script(script)
 	obj.run()
+
