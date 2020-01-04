@@ -29,17 +29,16 @@ linear_accel = 7.27
 radial_accel = -2.42
 scale = 0.1
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Sprite
 
 onready var animation_player = $AnimationPlayer2
 
-func _on_PlayButton_play_pressed():
+func _on_PlayButton_btn_pressed():
 	animation_player.play(\"titlePLAY\");
 "
 
-[sub_resource type="Animation" id=4]
-resource_name = "titleIDLE"
+[sub_resource type="Animation" id=5]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -55,8 +54,7 @@ tracks/0/keys = {
 "values": [ 0, 4 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "titlePLAY"
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -147,12 +145,12 @@ scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
 vframes = 15
 frame = 14
-script = SubResource( 6 )
+script = SubResource( 4 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/title"]
-anims/titleIDLE = SubResource( 4 )
-anims/titlePLAY = SubResource( 5 )
+anims/titleIDLE = SubResource( 5 )
+anims/titlePLAY = SubResource( 6 )
 [connection signal="animation_finished" from="Cam/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="play_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/title" method="_on_PlayButton_play_pressed"]
+[connection signal="btn_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/title" method="_on_PlayButton_btn_pressed"]
 
 [editable path="Cam/GUI/PlayButton"]

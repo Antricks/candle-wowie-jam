@@ -4,7 +4,7 @@ export var btnText : String
 export var nodePath : String
 export var functionToDo : String
 
-signal play_pressed
+signal btn_pressed
 
 func _ready():
 	$Label.text = btnText
@@ -14,7 +14,7 @@ func _on_Button_pressed():
 		get_node(nodePath).call(functionToDo)
 	elif functionToDo != "":
 		callFunction(functionToDo)	
-	emit_signal("play_pressed");
+	emit_signal("btn_pressed");
 	
 func callFunction(fnc):
 	var script = GDScript.new()
