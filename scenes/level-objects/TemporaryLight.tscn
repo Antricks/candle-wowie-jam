@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/light1.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends StaticBody2D
+
+export (float) var wait_time;
+export (int) var max_status = 6; 
+
+var active = false;
+var status = 0;
+
+func _process(delta):
+	$Sprite.frame = status;
+
+func _ready():
+	$Timer.wait_time = wait_time;
+
+func _on_shot():
+	status = (status+1)%(max_status+1);
+	if status > 0:
+		active = true;
+		$Timer.start();
+	$Sprite.frame = status;
+
+func deactivate():
+	status = 0;
+	active = false;
+
+func _on_Timer_timeout():
+	deactivate();
+"
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 12.7276
+
+[node name="TemporaryLight" type="StaticBody2D"]
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.440124, 5.72163 )
+scale = Vector2( 1.28386, 1.57681 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

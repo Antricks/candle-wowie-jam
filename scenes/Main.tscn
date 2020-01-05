@@ -1,23 +1,44 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/level-objects/StaticLight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/level-objects/TemporaryLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var solved = false;
+
+onready var item1 = $YSort/Light1
+onready var item2 = $YSort/Light2 
+
+func level_condition():
+	return item1.active and item2.active; 
+
+func _process(delta):
+	if not solved:
+		if(level_condition()):
+			on_level_solved();
+		
+func on_level_solved():
+	solved = true;
+	print(\"LEVEL SOLVED\")"
+
+[sub_resource type="GDScript" id=2]
 script/source = "extends StaticBody2D
 
 func _ready():
 	$Sprite/AnimationPlayer.play(\"flicker\");
 "
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="StreamTexture" id=3]
 load_path = "res://.import/lantern1_animated.png-948725328ab6ccc586b24880b0825691.stex"
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -33,10 +54,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 0, 2, 1, 2, 1, 2, 0, 2, 0, 1, 0, 2, 1, 2, 1, 2, 1, 0, 1, 0, 2, 1, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 2.22562, 1.752 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
+script = SubResource( 1 )
 
 [node name="TileMapFloor" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
@@ -47,46 +69,52 @@ tile_data = PoolIntArray( -327680, 14, 0, -327679, 14, 0, -327678, 14, 0, -19661
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="Light1" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 212.507, 166.97 )
+max_status = 1
+
+[node name="Light2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( -157.789, 405.186 )
+max_status = 1
+
 [node name="TileMapWalls" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0 )
+tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 262164, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 327700, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 511.352, 299.685 )
-
-[node name="UI" parent="YSort/Player" instance=ExtResource( 3 )]
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 515.147, 299.685 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort"]
 position = Vector2( 64.8881, 435.3 )
 scale = Vector2( 3.75844, 3.75844 )
-script = SubResource( 1 )
+script = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="YSort/StaticBody2D"]
 position = Vector2( 0.115213, -17.4425 )
 z_as_relative = false
-texture = SubResource( 2 )
+texture = SubResource( 3 )
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/StaticBody2D/Sprite"]
-anims/flicker = SubResource( 3 )
+anims/flicker = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/StaticBody2D"]
 position = Vector2( -0.322534, -6.64587 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
-[node name="Door" parent="YSort" instance=ExtResource( 4 )]
+[node name="Door" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 1119.97, 448.065 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/Level1.tscn"
 position_goal = Vector2( 360, 110 )
 
-[node name="GhostHand" parent="YSort" instance=ExtResource( 5 )]
+[node name="GhostHand" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 475.428, 382.649 )
 
-[node name="GhostHelmet" parent="YSort" instance=ExtResource( 6 )]
+[node name="GhostHelmet" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 1331.77, 613.004 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
@@ -98,7 +126,7 @@ collision_friction = 0.0
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 10, 16, 0, 11, 16, 0, 12, 16, 0, 13, 16, 0, 14, 16, 0, 65546, 16, 0, 65547, 16, 0, 65548, 16, 0, 65549, 16, 0, 65550, 16, 0, 589827, 13, 0 )
+tile_data = PoolIntArray( 10, 16, 0, 11, 16, 0, 12, 16, 0, 13, 16, 0, 14, 16, 0, 65546, 16, 0, 65547, 16, 0, 65548, 16, 0, 65549, 16, 0, 65550, 16, 0, 196628, 15, 2, 262164, 15, 131074, 589827, 13, 0 )
 
 [node name="TileMapOverlayShifted" type="TileMap" parent="."]
 position = Vector2( 0, -32 )

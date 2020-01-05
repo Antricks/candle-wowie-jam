@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/Flammen-Charakter.png" type="Texture" id=1]
 [ext_resource path="res://animations/player_idle.tres" type="Animation" id=2]
 [ext_resource path="res://shader/Glitch.shader" type="Shader" id=3]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -35,6 +36,7 @@ func _ready():
 	transitioning = false;
 
 func _process(delta):
+	$Camera2D/UI/MainContainer/Sprite.frame = lifes if lifes >= 0 else 0;
 	if Input.is_action_pressed(\"right\") || Input.is_action_pressed(\"left\"):
 		$Sprite.flip_h = Input.is_action_pressed(\"left\");
 	
@@ -118,7 +120,7 @@ height = 23.1439
 [sub_resource type="CircleShape2D" id=3]
 radius = 9.54865
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 resource_name = "hover"
 length = 2.0
 loop = true
@@ -214,7 +216,7 @@ hframes = 4
 anims/idle = ExtResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
-anims/hover = SubResource( 9 )
+anims/hover = SubResource( 4 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Sprite"]
 anims/invulnerable = SubResource( 5 )
@@ -236,8 +238,7 @@ texture = SubResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1380, 800 )
 
-[node name="Position2D" type="Position2D" parent="Camera2D"]
-position = Vector2( -512, -300 )
+[node name="UI" parent="Camera2D" instance=ExtResource( 4 )]
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
 wait_time = 2.0

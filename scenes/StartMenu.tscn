@@ -57,11 +57,11 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 size = 41
 font_data = ExtResource( 8 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -77,7 +77,7 @@ tracks/0/keys = {
 "values": [ 0, 4 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -159,7 +159,7 @@ margin_bottom = -151.0
 btnText = "Play"
 
 [node name="Label" parent="Cam/GUI/PlayButton" index="0"]
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Cam/GUI"]
 anchor_left = 0.5
@@ -173,8 +173,8 @@ vframes = 15
 frame = 4
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/CenterContainer/title"]
-anims/titleIDLE = SubResource( 5 )
-anims/titlePLAY = SubResource( 6 )
+anims/titleIDLE = SubResource( 6 )
+anims/titlePLAY = SubResource( 7 )
 [connection signal="pressed" from="Cam/GUI/PlayButton" to="." method="_on_PlayButton_pressed"]
 
 [editable path="Cam/GUI/PlayButton"]
