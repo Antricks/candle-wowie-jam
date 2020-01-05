@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
@@ -80,8 +81,11 @@ scale = Vector2( 4, 4 )
 scene_path = "res://scenes/Level1.tscn"
 position_goal = Vector2( 360, 110 )
 
-[node name="Glibber" parent="YSort" instance=ExtResource( 4 )]
+[node name="GhostHand" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 475.428, 382.649 )
+
+[node name="GhostHelmet" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1331.77, 613.004 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )

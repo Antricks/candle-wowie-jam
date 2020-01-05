@@ -116,7 +116,8 @@ height = 23.1439
 [sub_resource type="CircleShape2D" id=3]
 radius = 9.54865
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=9]
+resource_name = "hover"
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -130,6 +131,26 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("../CollisionShape2D2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -37.618, -0.25, 0, 0.25, 0, -31.618, -0.25, 0, 0.25, 0, -37.618, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("../CollisionShape2D:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -20, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
 }
 
 [sub_resource type="Animation" id=5]
@@ -173,25 +194,25 @@ margin_bottom = 560.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.192017, -12.9615 )
+position = Vector2( 0, -15.4101 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( -0.711983, -29.6184 )
+position = Vector2( -0.711983, -33.0281 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, 2 )
+offset = Vector2( 0, 1.49545 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/idle = ExtResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
-anims/hover = SubResource( 4 )
+anims/hover = SubResource( 9 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Sprite"]
 anims/invulnerable = SubResource( 5 )
@@ -221,6 +242,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="AbleToShootTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]

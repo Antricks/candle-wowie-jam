@@ -38,10 +38,10 @@ func _is_projectile():
 	return true;"
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 3.78192
+radius = 4.43946
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 1.7689
+radius = 3.69569
 
 [node name="Projectile" type="KinematicBody2D"]
 script = SubResource( 1 )

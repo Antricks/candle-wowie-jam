@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/ghost_helmet1.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends KinematicBody2D
+
+export var speed = 50
+var velocity = Vector2()
+
+onready var target_node = $\"/root/Global\".player_node;
+
+func _ready():
+	$Sprite/AnimationPlayer.play(\"idle\");
+	$Sprite/AnimationPlayer2.play(\"hover\");
+
+func _process(delta):
+	velocity = Vector2(-speed, 0).rotated(position.angle_to_point(target_node.position))
+	move_and_slide(velocity)
+	######
+	for body in $CollisionShape2D/Area2D.get_overlapping_bodies():
+		if body.name == \"Player\" and body.has_method(\"_on_hit\"): 
+			body._on_hit();
+			
+func _on_shot():
+	self.queue_free();"
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hover"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 0, 2 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.6487
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.531
+
+[node name="GhostHelmet" type="KinematicBody2D"]
+script = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -0.169888 )
+hframes = 3
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/idle = SubResource( 1 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
+anims/hover = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.40926 )
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="CollisionShape2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/Area2D"]
+shape = SubResource( 4 )
