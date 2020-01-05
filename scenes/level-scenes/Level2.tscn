@@ -11,6 +11,10 @@ script/source = "extends Node2D
 var solved = false;
 export (int) var LEVEL_ID;
 
+func _ready():
+	if $\"/root/Global\".level_solved_switches[LEVEL_ID]:
+		on_level_solved();
+
 func level_condition():
 	return true; 
 
