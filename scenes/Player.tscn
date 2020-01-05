@@ -196,18 +196,18 @@ margin_bottom = 560.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -21.9436 )
+position = Vector2( 0, -24.9524 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( -0.711983, -39.5616 )
+position = Vector2( -0.711983, -42.5704 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -1.28784 )
+offset = Vector2( 0, -1.96739 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]

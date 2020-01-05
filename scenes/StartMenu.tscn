@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/BGdark.png" type="Texture" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://animations/Parallax.tres" type="Animation" id=5]
 [ext_resource path="res://animations/FadeIn.tres" type="Animation" id=6]
 [ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/title.png" type="Texture" id=8]
+[ext_resource path="res://fonts/coders-crux-2.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/title.png" type="Texture" id=9]
 
 [sub_resource type="Gradient" id=1]
 
@@ -44,7 +45,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("title:modulate")
+tracks/1/path = NodePath("CenterContainer/title:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -55,6 +56,10 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+
+[sub_resource type="DynamicFont" id=7]
+size = 41
+font_data = ExtResource( 8 )
 
 [sub_resource type="Animation" id=5]
 length = 0.4
@@ -154,16 +159,20 @@ margin_bottom = -151.0
 btnText = "Play"
 
 [node name="Label" parent="Cam/GUI/PlayButton" index="0"]
-self_modulate = Color( 1, 1, 1, 0 )
+custom_fonts/font = SubResource( 7 )
 
-[node name="title" type="Sprite" parent="Cam/GUI"]
-position = Vector2( 512, 100 )
+[node name="CenterContainer" type="CenterContainer" parent="Cam/GUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 100.0
+
+[node name="title" type="Sprite" parent="Cam/GUI/CenterContainer"]
 scale = Vector2( 6.64939, 6.64939 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 vframes = 15
 frame = 4
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/title"]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/CenterContainer/title"]
 anims/titleIDLE = SubResource( 5 )
 anims/titlePLAY = SubResource( 6 )
 [connection signal="pressed" from="Cam/GUI/PlayButton" to="." method="_on_PlayButton_pressed"]
