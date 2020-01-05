@@ -12,9 +12,14 @@
 script/source = "extends Node2D
 
 var solved = false;
+export (int) var LEVEL_ID;
 
 onready var item1 = $YSort/Light1
-onready var item2 = $YSort/Light2 
+onready var item2 = $YSort/Light2
+
+func _ready():
+	if $\"/root/Global\".level_solved_switches[LEVEL_ID]:
+		on_level_solved();
 
 func level_condition():
 	return item1.active and item2.active; 
@@ -26,7 +31,7 @@ func _process(delta):
 		
 func on_level_solved():
 	solved = true;
-	print(\"LEVEL SOLVED\")"
+	print(\"LEVEL SOLVED - \", LEVEL_ID)"
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends StaticBody2D
@@ -57,7 +62,7 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 2.22562, 1.752 )
 
-[node name="Main" type="Node2D"]
+[node name="Level0" type="Node2D"]
 script = SubResource( 1 )
 
 [node name="TileMapFloor" type="TileMap" parent="."]
