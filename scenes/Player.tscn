@@ -11,10 +11,11 @@ var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
 
 export (int) var MAX_SPEED = 250;
 export (int) var ACCELERATION = 4000;
-export (int) var MULTIPLIER = 1;
+export (float) var MULTIPLIER = 1;
 
-export (Vector2) var velocity = Vector2();
+export (int) var lifes = 6;
 
+var velocity = Vector2();
 var transitioning = false;
 var able_to_shoot = true;
 
@@ -23,6 +24,8 @@ func _ready():
 	$Sprite/AnimationPlayer2.play(\"hover\");
 	$\"/root/Global\".register_player(self);
 	position = $\"/root/Global\".get_saved_player_init_position();
+	if($\"/root/Global\".get_player_lifes()):
+		lifes = $\"/root/Global\".get_player_lifes();
 	transitioning = false;
 
 func _process(delta):
@@ -88,7 +91,9 @@ func _input(event):
 			shoot(game_field_position);
 		
 func handle_damage():
-	pass
+	lifes -= 1;
+	$\"/root/Global\".save_player_lifes(lifes);
+	print(\"Lifes: \", lifes)
 
 func _on_AbleToShootTimer_timeout():
 	able_to_shoot = true;
