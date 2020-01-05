@@ -1,18 +1,21 @@
 extends TextureButton
 
 export var btnText : String
+# export var nodePath : String
+# export var functionToDo : String
 
 func _ready():
 	$Label.text = btnText
 
 # DAS WAR MEGA UNNÖTIG, MAN KANN EINFACH DAS SIGNAL pressed()
-# IN DEM HAUPT SCRIPT VERWENDEN
+# IN DEM HAUPTSCRIPT VERWENDEN, STATT TAUSENDE UNTERSCHIEDLICHE FUNKTIONEN
+# GLEICHZEITIG ZU STARTEN
 #
 #func _on_Button_pressed():
 #	if nodePath != "" and functionToDo != "":
 #		get_node(nodePath).call(functionToDo)
 #	elif functionToDo != "":
-#		callFunction(functionToDo)	
+#		callFunction(functionToDo);
 #
 #func callFunction(fnc, env = null):
 #	var script = GDScript.new()
