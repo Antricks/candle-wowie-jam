@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/BGdark.png" type="Texture" id=2]
@@ -55,25 +55,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="GDScript" id=5]
-script/source = "extends AnimationPlayer
-
-func _ready():
-	pass
-	
-func btn_play():
-	yield(get_tree().create_timer(1.4), \"timeout\")
-	play(\"fadeOut\")"
-
-[sub_resource type="GDScript" id=6]
-script/source = "extends Sprite
-
-onready var animation_player = $AnimationPlayer2
-
-func _on_PlayButton_btn_pressed():
-	animation_player.play(\"titlePLAY\");
-"
 
 [sub_resource type="Animation" id=7]
 length = 0.4
@@ -142,8 +123,8 @@ texture = ExtResource( 3 )
 stream = ExtResource( 4 )
 
 [node name="Cam" type="Camera2D" parent="."]
-position = Vector2( 544, 300 )
-rotation = 0.0439823
+position = Vector2( 516.76, 300 )
+rotation = -0.00804248
 scale = Vector2( 0.958428, 1.49736 )
 rotating = true
 current = true
@@ -160,10 +141,8 @@ anims/Wackeln = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cam/GUI"]
 anims/fadeIn = ExtResource( 6 )
 anims/fadeOut = SubResource( 4 )
-script = SubResource( 5 )
 
 [node name="PlayButton" parent="Cam/GUI" instance=ExtResource( 7 )]
-self_modulate = Color( 1, 1, 1, 0.222222 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -173,7 +152,6 @@ margin_top = -265.0
 margin_right = 175.0
 margin_bottom = -151.0
 btnText = "Play"
-functionToDo = "yield(get_tree().create_timer(2.8), \"timeout\"); get_tree().change_scene(\"res://scenes/Main.tscn\")"
 
 [node name="Label" parent="Cam/GUI/PlayButton" index="0"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -183,14 +161,11 @@ position = Vector2( 512, 100 )
 scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
 vframes = 15
-frame = 3
-script = SubResource( 6 )
+frame = 4
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/title"]
 anims/titleIDLE = SubResource( 7 )
 anims/titlePLAY = SubResource( 8 )
-[connection signal="animation_finished" from="Cam/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="btn_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/title" method="_on_PlayButton_btn_pressed"]
-[connection signal="btn_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/AnimationPlayer" method="btn_play"]
+[connection signal="pressed" from="Cam/GUI/PlayButton" to="." method="_on_PlayButton_pressed"]
 
 [editable path="Cam/GUI/PlayButton"]
