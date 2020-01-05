@@ -56,7 +56,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=5]
 script/source = "extends AnimationPlayer
 
 func _ready():
@@ -66,7 +66,7 @@ func btn_play():
 	yield(get_tree().create_timer(1.4), \"timeout\")
 	play(\"fadeOut\")"
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=6]
 script/source = "extends Sprite
 
 onready var animation_player = $AnimationPlayer2
@@ -75,7 +75,7 @@ func _on_PlayButton_btn_pressed():
 	animation_player.play(\"titlePLAY\");
 "
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -91,7 +91,7 @@ tracks/0/keys = {
 "values": [ 0, 4 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -160,7 +160,7 @@ anims/Wackeln = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cam/GUI"]
 anims/fadeIn = ExtResource( 6 )
 anims/fadeOut = SubResource( 4 )
-script = SubResource( 8 )
+script = SubResource( 5 )
 
 [node name="PlayButton" parent="Cam/GUI" instance=ExtResource( 7 )]
 self_modulate = Color( 1, 1, 1, 0.222222 )
@@ -184,11 +184,11 @@ scale = Vector2( 6.64939, 6.64939 )
 texture = ExtResource( 8 )
 vframes = 15
 frame = 3
-script = SubResource( 5 )
+script = SubResource( 6 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/title"]
-anims/titleIDLE = SubResource( 6 )
-anims/titlePLAY = SubResource( 7 )
+anims/titleIDLE = SubResource( 7 )
+anims/titlePLAY = SubResource( 8 )
 [connection signal="animation_finished" from="Cam/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="btn_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/title" method="_on_PlayButton_btn_pressed"]
 [connection signal="btn_pressed" from="Cam/GUI/PlayButton" to="Cam/GUI/AnimationPlayer" method="btn_play"]

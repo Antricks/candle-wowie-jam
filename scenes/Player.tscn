@@ -12,7 +12,8 @@ var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
 export (int) var MAX_SPEED = 250;
 export (int) var ACCELERATION = 4000;
 export (int) var MULTIPLIER = 1;
-export (Vector2) var motion = Vector2();
+
+export (Vector2) var velocity = Vector2();
 
 var transitioning = false;
 var able_to_shoot = true;
@@ -34,8 +35,11 @@ func _physics_process(delta):
 		apply_fricition(ACCELERATION*delta)
 	else:
 		apply_movement(axis * ACCELERATION * delta)
-	motion = move_and_slide(motion * MULTIPLIER)
-
+	if not transitioning:
+		velocity = move_and_slide(velocity * Vector2(MULTIPLIER,MULTIPLIER));
+	else:
+		move_and_slide(Vector2(0,-150));
+		
 func get_input_axis():
 	var axis = Vector2.ZERO
 	axis.x = int(Input.is_action_pressed(\"right\")) - int(Input.is_action_pressed(\"left\"))
@@ -43,14 +47,14 @@ func get_input_axis():
 	return axis.normalized()
 
 func apply_fricition(amount):
-	if motion.length() > amount:
-		motion -= motion.normalized() * amount
+	if velocity.length() > amount:
+		velocity -= velocity.normalized() * amount
 	else:
-		motion = Vector2.ZERO
+		velocity = Vector2.ZERO
 		
 func apply_movement(acceleration):
-	motion += acceleration
-	motion = motion.clamped(MAX_SPEED)
+	velocity += acceleration
+	velocity = velocity.clamped(MAX_SPEED)
 
 func _on_Player_tree_entered():
 	Global.playerNodePath = \"/root/\" + get_tree().root.get_path_to(self)
@@ -69,6 +73,7 @@ func _on_hit():
 func shoot(goal):
 	able_to_shoot = false;
 	var projectile = bullet.instance();
+	projectile.speed = 300
 	projectile.friendly = true;
 	projectile.scale = Vector2(2,2);
 	projectile.position = position+Vector2(0,-32);
