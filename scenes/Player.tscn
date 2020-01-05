@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Flammen-Charakter.png" type="Texture" id=1]
 [ext_resource path="res://animations/player_idle.tres" type="Animation" id=2]
@@ -6,6 +6,8 @@
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
+
+signal game_over();
 
 var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
 
@@ -18,6 +20,8 @@ export (int) var lifes = 6;
 var velocity = Vector2();
 var transitioning = false;
 var able_to_shoot = true;
+
+var vulnerable = true;
 
 func _ready():
 	$Sprite/AnimationPlayer.play(\"idle\");
@@ -42,7 +46,7 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity * Vector2(MULTIPLIER,MULTIPLIER));
 	else:
 		move_and_slide(Vector2(0,-150));
-		
+	
 func get_input_axis():
 	var axis = Vector2.ZERO
 	axis.x = int(Input.is_action_pressed(\"right\")) - int(Input.is_action_pressed(\"left\"))
@@ -62,15 +66,10 @@ func apply_movement(acceleration):
 func _on_Player_tree_entered():
 	Global.playerNodePath = \"/root/\" + get_tree().root.get_path_to(self)
 
-func _on_SavePositionTimer_timeout():
-	$\"/root/Global\".save_player_position(position);
-
 func _on_shot():
-	print(\"shot\");
 	handle_damage();
 	
 func _on_hit():
-	print(\"hit\");
 	handle_damage();
 
 func shoot(goal):
@@ -91,20 +90,33 @@ func _input(event):
 			shoot(game_field_position);
 		
 func handle_damage():
-	lifes -= 1;
-	$\"/root/Global\".save_player_lifes(lifes);
-	print(\"Lifes: \", lifes)
+	if vulnerable:
+		$InvulnerableTimer.start();
+		vulnerable = false;
+		$Sprite/AnimationPlayer3.play(\"invulnerable\");
+		lifes -= 1;
+		$\"/root/Global\".save_player_lifes(lifes);
+		print(\"Lifes: \", lifes)
+		if not lifes:
+			emit_signal(\"game_over\");
 
 func _on_AbleToShootTimer_timeout():
 	able_to_shoot = true;
+
+
+func _on_InvulnerableTimer_timeout():
+	vulnerable = true;
+	$Sprite/AnimationPlayer3.stop();
 "
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 9.25604
-height = 27.8974
+radius = 4.68361
+height = 23.1439
 
-[sub_resource type="Animation" id=3]
-resource_name = "hover"
+[sub_resource type="CircleShape2D" id=3]
+radius = 9.54865
+
+[sub_resource type="Animation" id=4]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -120,15 +132,32 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
 }
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="Animation" id=5]
+resource_name = "invulnerable"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.465147 ), Color( 1, 1, 1, 0.95385 ), Color( 1, 1, 1, 0.447059 ), Color( 1, 1, 1, 0.910019 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0 )
 colors = PoolColorArray( 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
 [node name="Player" type="KinematicBody2D"]
 script = SubResource( 1 )
@@ -144,8 +173,12 @@ margin_bottom = 560.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.484009, -18.5093 )
+position = Vector2( 0.192017, -12.9615 )
 shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( -0.711983, -29.6184 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.217651, -35.5402 )
@@ -158,7 +191,10 @@ hframes = 4
 anims/idle = ExtResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
-anims/hover = SubResource( 3 )
+anims/hover = SubResource( 4 )
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="Sprite"]
+anims/invulnerable = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 4096
@@ -171,21 +207,21 @@ drag_margin_bottom = 0.0
 
 [node name="ShaderSprite" type="Sprite" parent="Camera2D"]
 visible = false
-material = SubResource( 4 )
+material = SubResource( 6 )
 z_index = 4096
-texture = SubResource( 6 )
+texture = SubResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1380, 800 )
 
 [node name="Position2D" type="Position2D" parent="Camera2D"]
 position = Vector2( -512, -300 )
 
-[node name="SavePositionTimer" type="Timer" parent="."]
-wait_time = 1.2
-autostart = true
+[node name="InvulnerableTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="AbleToShootTimer" type="Timer" parent="."]
 autostart = true
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
-[connection signal="timeout" from="SavePositionTimer" to="." method="_on_SavePositionTimer_timeout"]
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
 [connection signal="timeout" from="AbleToShootTimer" to="." method="_on_AbleToShootTimer_timeout"]

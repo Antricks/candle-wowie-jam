@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/hand_ghost1.png" type="Texture" id=1]
 
@@ -10,6 +10,7 @@ var alive = true;
 
 export var lifes : int = 3
 export var speed : int = 50
+export var delay_time : float = 0.5
 
 onready var targetNodePath = Global.playerNodePath
 
@@ -17,46 +18,31 @@ func set_target(target):
 	targetNodePath = target;
 
 func _process(delta):
-	pass
-
-func _on_MoveTimer_timeout():
-	if alive:
-		$Sprite/AnimationPlayer2.play_backwards(\"fade_alpha\");
-		yield($Sprite/AnimationPlayer2, \"animation_finished\");
-		position = $\"/root/Global\".get_saved_player_position();
-		$Sprite/AnimationPlayer.play(\"grab\");
-		$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
-		$Sprite/AnimationPlayer2.play(\"fade_alpha\");
-
-func _on_Area2D_body_entered(body):
-	if alive:
+	for body in $Area2D.get_overlapping_bodies():
 		if body.has_method(\"_on_hit\"):
 			body._on_hit();
 
+func _on_MoveTimer_timeout():
+	if alive:
+		$AnimationPlayer2.play_backwards(\"fade_alpha\");
+		yield($AnimationPlayer2, \"animation_finished\");
+		######
+		var player_pos = $\"/root/Global\".player_node.position;
+		yield(get_tree().create_timer(delay_time), \"timeout\");
+		position = player_pos;
+		######
+		$Sprite.flip_h = get_node(targetNodePath).position.x > position.x
+		$Sprite/AnimationPlayer.play(\"grab\");
+		$AnimationPlayer2.play(\"fade_alpha\");
+
 func _on_shot():
 	alive = false;
-	$Sprite/AnimationPlayer2.play_backwards(\"fade_alpha\");
-	yield($Sprite/AnimationPlayer2, \"animation_finished\");
+	$AnimationPlayer2.play_backwards(\"fade_alpha\");
+	yield($AnimationPlayer2, \"animation_finished\");
 	self.queue_free();
 "
 
 [sub_resource type="Animation" id=2]
-resource_name = "grab"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 1, 0 ]
-}
-
-[sub_resource type="Animation" id=3]
 resource_name = "fade_alpha"
 length = 0.5
 tracks/0/type = "value"
@@ -71,22 +57,84 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:offset:y")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 2, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ), Vector2( 0, -1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.812, 8.896 ), Vector2( -0.812216, -7.10403 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.316, 21.207 ), Vector2( 0.315559, 5.20671 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Area2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 16 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 13.6054
+radius = 11.0971
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.78947, 12.7999 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 7.49201, 12.9477 )
 
 [node name="GhostHand" type="KinematicBody2D"]
 script = SubResource( 1 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/fade_alpha = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1 )
@@ -96,25 +144,30 @@ offset = Vector2( 0, -1 )
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/grab = SubResource( 2 )
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
-anims/fade_alpha = SubResource( 3 )
+anims/grab = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.0871261, -0.358978 )
-scale = Vector2( 0.799999, 1.56 )
+position = Vector2( -0.812216, -7.10403 )
+scale = Vector2( 1.16, 1.24 )
 shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 0.315559, 5.20671 )
+shape = SubResource( 5 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0.0871261, -0.358978 )
-scale = Vector2( 1, 1.92 )
+position = Vector2( -0.812219, -7.2947 )
+scale = Vector2( 1.34369, 1.34143 )
 shape = SubResource( 4 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.473339, 5.78094 )
+shape = SubResource( 6 )
+
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 autostart = true
 
 [node name="Tween" type="Tween" parent="."]
