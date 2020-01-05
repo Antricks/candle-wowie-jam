@@ -14,13 +14,13 @@ var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
 export (int) var MAX_SPEED = 250;
 export (int) var ACCELERATION = 4000;
 export (float) var MULTIPLIER = 1;
-
 export (int) var lifes = 6;
+
+onready var camera = $Camera2D;
 
 var velocity = Vector2();
 var transitioning = false;
 var able_to_shoot = true;
-
 var vulnerable = true;
 
 func _ready():
@@ -30,6 +30,8 @@ func _ready():
 	position = $\"/root/Global\".get_saved_player_init_position();
 	if($\"/root/Global\".get_player_lifes()):
 		lifes = $\"/root/Global\".get_player_lifes();
+	else:
+		$\"/root/Global\".save_player_lifes(lifes);
 	transitioning = false;
 
 func _process(delta):
@@ -130,7 +132,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
+"values": [ Vector2( 0, -3 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("../CollisionShape2D2:position:y")
@@ -139,7 +141,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -37.618, -0.25, 0, 0.25, 0, -31.618, -0.25, 0, 0.25, 0, -37.618, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -47.618, -0.25, 0, 0.25, 0, -33.618, -0.25, 0, 0.25, 0, -47.618, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1, 2 )
 }
 tracks/2/type = "bezier"
@@ -149,7 +151,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( -20, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -20, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -30, -0.25, 0, 0.25, 0, -16, -0.25, 0, 0.25, 0, -30, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1, 2 )
 }
 
@@ -194,18 +196,18 @@ margin_bottom = 560.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -15.4101 )
+position = Vector2( 0, -21.9436 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( -0.711983, -33.0281 )
+position = Vector2( -0.711983, -39.5616 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, 1.49545 )
+offset = Vector2( 0, -1.28784 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]

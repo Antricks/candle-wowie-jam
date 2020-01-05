@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
@@ -56,14 +57,15 @@ tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 1
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 511.352, 299.685 )
 
+[node name="UI" parent="YSort/Player" instance=ExtResource( 3 )]
+
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort"]
-editor/display_folded = true
 position = Vector2( 64.8881, 435.3 )
 scale = Vector2( 3.75844, 3.75844 )
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="YSort/StaticBody2D"]
-position = Vector2( 0.593127, -11.8668 )
+position = Vector2( 0.115213, -17.4425 )
 z_as_relative = false
 texture = SubResource( 2 )
 hframes = 3
@@ -72,19 +74,19 @@ hframes = 3
 anims/flicker = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/StaticBody2D"]
-position = Vector2( 0.15538, -1.07022 )
+position = Vector2( -0.322534, -6.64587 )
 shape = SubResource( 4 )
 
-[node name="Door" parent="YSort" instance=ExtResource( 3 )]
+[node name="Door" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1119.97, 448.065 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/Level1.tscn"
 position_goal = Vector2( 360, 110 )
 
-[node name="GhostHand" parent="YSort" instance=ExtResource( 4 )]
+[node name="GhostHand" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 475.428, 382.649 )
 
-[node name="GhostHelmet" parent="YSort" instance=ExtResource( 5 )]
+[node name="GhostHelmet" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 1331.77, 613.004 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
@@ -108,8 +110,3 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 65545, 9, 0, 131086, 15, 0, 131087, 15, 1, 131088, 15, 1, 131089, 15, 1, 131090, 15, 1, 131091, 15, 2, 196622, 15, 65536, 196623, 15, 65537, 196624, 15, 65537, 196625, 15, 65537, 196626, 15, 65537, 196627, 15, 65538, 262158, 15, 65536, 262159, 15, 65537, 262160, 15, 65537, 262161, 15, 65537, 262162, 15, 65537, 262163, 15, 65538, 327694, 15, 131072, 327695, 15, 131073, 327696, 15, 131073, 327697, 15, 131073, 327698, 15, 131073, 327699, 15, 131074, 458765, 10, 0, 589827, 17, 0, 655364, 17, 0 )
-
-[node name="UI" type="Node2D" parent="."]
-
-[node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 1024, 600 )
