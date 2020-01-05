@@ -11,4 +11,4 @@ func _on_PlayButton_pressed():
 	yield($Cam/GUI/CenterContainer/title/AnimationPlayer2, "animation_finished");
 	$Cam/GUI/AnimationPlayer.play("fadeOut");
 	yield($Cam/GUI/AnimationPlayer, "animation_finished");
-	$"/root/SceneChanger".change_scene("res://scenes/Main.tscn", 0);
+	$"/root/SceneChanger".change_scene("res://scenes/level-scenes/Level0.tscn", 0);
