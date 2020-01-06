@@ -17,21 +17,32 @@ export (int) var LEVEL_ID;
 
 onready var item1 = $YSort/Light1
 onready var item2 = $YSort/Light2
+onready var item3 = $YSort/Light3
 
 func _ready():
-	if $\"/root/Global\".level_solved_switches[LEVEL_ID]:
-		on_level_solved();
+	solved = $\"/root/Global\".level_solved_switches[LEVEL_ID];
+	print(\"is level solved - \", LEVEL_ID, \" - \", solved);
+	level_logic(solved);
 
-func level_condition():
-	return item1.active and item2.active; 
+func level_logic(_solved = false):
+	if (item1.active and item2.active) or _solved:
+		$YSort/FenceTileMap1.visible = false;
+		$YSort/FenceTileMap1.set_collision_layer_bit(0,false);
+		$YSort/FenceTileMap1.set_collision_mask_bit(0,false);
+	else:
+		$YSort/FenceTileMap1.visible = true;
+		$YSort/FenceTileMap1.set_collision_layer_bit(0,true);
+		$YSort/FenceTileMap1.set_collision_mask_bit(0,true);
+	if (item1.active and item2.active and item3.active) or _solved:
+		on_level_solved();
 
 func _process(delta):
 	if not solved:
-		if(level_condition()):
-			on_level_solved();
+		level_logic();
 		
 func on_level_solved():
 	solved = true;
+	$\"/root/Global\".level_solved_switches[LEVEL_ID] = solved;
 	print(\"LEVEL SOLVED - \", LEVEL_ID)"
 
 [node name="Level0" type="Node2D"]
@@ -52,7 +63,7 @@ max_status = 1
 
 [node name="Light2" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( -157.789, 405.186 )
-wait_time = 2.0
+wait_time = 3.0
 active_frame = 2
 
 [node name="Light3" parent="YSort" instance=ExtResource( 2 )]
