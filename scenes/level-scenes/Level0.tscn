@@ -35,6 +35,10 @@ func level_logic(_solved = false):
 		$YSort/FenceTileMap1.set_collision_mask_bit(0,true);
 	if (item1.active and item2.active and item3.active) or _solved:
 		on_level_solved();
+	if _solved:
+		item1.activate();
+		item2.activate();
+		item3.activate();
 
 func _process(delta):
 	if not solved:
@@ -68,6 +72,7 @@ active_frame = 2
 
 [node name="Light3" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 542.905, 939.919 )
+max_status = 1
 
 [node name="FenceTileMap1" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
@@ -83,10 +88,24 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 262164, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 327700, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0, 720902, 536870928, 0, 720906, 536870928, 0, 786438, 536870928, 0, 786442, 536870928, 0, 851974, 536870928, 0, 851978, 536870928, 0, 917510, 536870928, 0, 917514, 536870928, 0, 983046, 536870928, 0, 983050, 536870928, 0, 1048582, 536870928, 0, 1048586, 536870928, 0, 1114118, 536870928, 0, 1114122, 536870928, 0, 1179654, 536870928, 0, 1179655, 536870928, 0, 1179656, 536870928, 0, 1179657, 536870928, 0, 1179658, 536870928, 0 )
 
+[node name="TileMapShadowsShifted" type="TileMap" parent="YSort/TileMapWalls"]
+position = Vector2( 0, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 327695, 29, 0, 327696, 29, 0, 327697, 29, 0, 327698, 29, 0, 327699, 29, 0 )
+
+[node name="TileMapShadows" type="TileMap" parent="YSort/TileMapWalls"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 131082, 1610612765, 0, 131083, 1610612765, 0, 131084, 1610612765, 0, 131085, 1610612765, 0, 131086, 1610612765, 0, 196618, -1610612706, 0, 196619, 29, 0, 196620, 29, 0, 196621, 29, 0, 196622, 29, 0, 262158, 29, 0, 262165, -1073741794, 0, 327700, -1610612705, 0, 327701, -1073741795, 0, 393236, 28, 0, 393237, 30, 0, 458766, 1610612765, 0, 458767, 1610612765, 0, 458768, 1610612765, 0, 458770, 1610612765, 0, 458771, 1610612765, 0, 458772, -1073741795, 0, 524302, -1610612706, 0, 524303, 29, 0, 524304, 29, 0, 524305, 29, 0, 524306, 29, 0, 524307, 29, 0, 524308, 30, 0, 655363, 1610612765, 0, 655364, 1610612765, 0, 655365, -1073741794, 0, 720899, -1610612706, 0, 720900, 29, 0, 720901, 30, 0 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 515.147, 299.685 )
 
 [node name="Lantern" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 71.5561, 527.426 )
 
 [node name="Door" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 1119.97, 448.065 )

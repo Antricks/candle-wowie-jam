@@ -27,23 +27,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 2.22562, 1.752 )
+extents = Vector2( 7.65057, 24.885 )
 
 [node name="Lantern" type="StaticBody2D"]
-editor/display_folded = true
-position = Vector2( 64.8881, 435.3 )
-scale = Vector2( 3.75844, 3.75844 )
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.115213, -17.4425 )
+position = Vector2( 0, -60 )
+scale = Vector2( 4, 4 )
 z_as_relative = false
 texture = SubResource( 2 )
 hframes = 3
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/flicker = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.322534, -6.64587 )
+position = Vector2( 0.0337054, 12.2995 )
 shape = SubResource( 4 )
