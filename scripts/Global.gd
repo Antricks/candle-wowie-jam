@@ -8,6 +8,12 @@ var player_lifes : int;
 
 var level_solved_switches = [false,false,false,false,false,false,false,false,false];
 
+func reset():
+	level_solved_switches = [false,false,false,false,false,false,false,false,false];
+	player_position = Vector2(0,0); 
+	player_init_position = Vector2(0,0) ;
+	player_lifes = 0;
+
 func get_player_lifes():
 	return player_lifes;
 
