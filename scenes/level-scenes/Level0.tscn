@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/level-objects/StaticLight.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/level-objects/TemporaryLight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Lantern.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -33,35 +34,6 @@ func on_level_solved():
 	solved = true;
 	print(\"LEVEL SOLVED - \", LEVEL_ID)"
 
-[sub_resource type="GDScript" id=2]
-script/source = "extends StaticBody2D
-
-func _ready():
-	$Sprite/AnimationPlayer.play(\"flicker\");
-"
-
-[sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/lantern1_animated.png-948725328ab6ccc586b24880b0825691.stex"
-
-[sub_resource type="Animation" id=4]
-length = 10.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 1.2, 1.3, 1.4, 1.8, 1.9, 2, 2.5, 2.8, 3.1, 4, 4.1, 5, 5.3496, 5.5, 6.6, 7, 7.1, 7.5, 7.6, 7.7, 8.5, 9.3, 9.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 0, 2, 1, 2, 1, 2, 0, 2, 0, 1, 0, 2, 1, 2, 1, 2, 1, 0, 1, 0, 2, 1, 0 ]
-}
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 2.22562, 1.752 )
-
 [node name="Level0" type="Node2D"]
 script = SubResource( 1 )
 
@@ -83,45 +55,38 @@ position = Vector2( -157.789, 405.186 )
 wait_time = 2.0
 active_frame = 2
 
+[node name="Light3" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 542.905, 939.919 )
+
+[node name="FenceTileMap1" type="TileMap" parent="YSort"]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 720903, 8, 0, 720904, 8, 1, 720905, 8, 2, 786439, 8, 65536, 786440, 8, 65537, 786441, 8, 65538, 851975, 8, 131072, 851976, 8, 131073, 851977, 8, 131074, 983031, 16, 0 )
+
 [node name="TileMapWalls" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 262164, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 327700, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0 )
+tile_data = PoolIntArray( 131082, 16, 0, 131083, 16, 0, 131084, 16, 0, 131085, 16, 0, 131086, 16, 0, 262158, 16, 0, 262159, 16, 0, 262160, 16, 0, 262161, 16, 0, 262162, 16, 0, 262163, 16, 0, 262164, 16, 0, 327694, 16, 0, 327695, 16, 0, 327696, 16, 0, 327697, 16, 0, 327698, 16, 0, 327699, 16, 0, 327700, 16, 0, 393229, 0, 0, 393230, 16, 0, 393231, 5, 0, 393232, 16, 0, 393233, 12, 0, 393234, 16, 0, 393235, 16, 0, 458766, 16, 0, 458767, 16, 0, 458768, 16, 0, 458770, 16, 0, 458771, 16, 0, 655363, 13, 0, 655364, 13, 0, 720902, 536870928, 0, 720906, 536870928, 0, 786438, 536870928, 0, 786442, 536870928, 0, 851974, 536870928, 0, 851978, 536870928, 0, 917510, 536870928, 0, 917514, 536870928, 0, 983046, 536870928, 0, 983050, 536870928, 0, 1048582, 536870928, 0, 1048586, 536870928, 0, 1114118, 536870928, 0, 1114122, 536870928, 0, 1179654, 536870928, 0, 1179655, 536870928, 0, 1179656, 536870928, 0, 1179657, 536870928, 0, 1179658, 536870928, 0 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 515.147, 299.685 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="YSort"]
-editor/display_folded = true
-position = Vector2( 64.8881, 435.3 )
-scale = Vector2( 3.75844, 3.75844 )
-script = SubResource( 2 )
+[node name="Lantern" parent="YSort" instance=ExtResource( 5 )]
 
-[node name="Sprite" type="Sprite" parent="YSort/StaticBody2D"]
-position = Vector2( 0.115213, -17.4425 )
-z_as_relative = false
-texture = SubResource( 3 )
-hframes = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/StaticBody2D/Sprite"]
-anims/flicker = SubResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/StaticBody2D"]
-position = Vector2( -0.322534, -6.64587 )
-shape = SubResource( 5 )
-
-[node name="Door" parent="YSort" instance=ExtResource( 5 )]
+[node name="Door" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 1119.97, 448.065 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/level-scenes/Level1.tscn"
 position_goal = Vector2( 360, 110 )
 
-[node name="GhostHand" parent="YSort" instance=ExtResource( 6 )]
+[node name="GhostHand" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 475.428, 382.649 )
 
-[node name="GhostHelmet" parent="YSort" instance=ExtResource( 7 )]
+[node name="GhostHelmet" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 1331.77, 613.004 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
@@ -133,7 +98,7 @@ collision_friction = 0.0
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 10, 16, 0, 11, 16, 0, 12, 16, 0, 13, 16, 0, 14, 16, 0, 65546, 16, 0, 65547, 16, 0, 65548, 16, 0, 65549, 16, 0, 65550, 16, 0, 196628, 15, 2, 262164, 15, 131074, 589827, 13, 0 )
+tile_data = PoolIntArray( 10, 16, 0, 11, 16, 0, 12, 16, 0, 13, 16, 0, 14, 16, 0, 65546, 16, 0, 65547, 16, 0, 65548, 16, 0, 65549, 16, 0, 65550, 16, 0, 196628, 15, 2, 262164, 15, 131074, 589827, 13, 0, 1048583, 536870928, 0, 1048584, 536870928, 0, 1048585, 536870928, 0, 1114119, 536870928, 0, 1114120, 536870928, 0, 1114121, 536870928, 0 )
 
 [node name="TileMapOverlayShifted" type="TileMap" parent="."]
 position = Vector2( 0, -32 )
@@ -144,4 +109,4 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 65545, 9, 0, 131086, 15, 0, 131087, 15, 1, 131088, 15, 1, 131089, 15, 1, 131090, 15, 1, 131091, 15, 2, 196622, 15, 65536, 196623, 15, 65537, 196624, 15, 65537, 196625, 15, 65537, 196626, 15, 65537, 196627, 15, 65538, 262158, 15, 65536, 262159, 15, 65537, 262160, 15, 65537, 262161, 15, 65537, 262162, 15, 65537, 262163, 15, 65538, 327694, 15, 131072, 327695, 15, 131073, 327696, 15, 131073, 327697, 15, 131073, 327698, 15, 131073, 327699, 15, 131074, 458765, 10, 0, 589827, 17, 0, 655364, 17, 0 )
+tile_data = PoolIntArray( 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 65545, 9, 0, 131086, 15, 0, 131087, 15, 1, 131088, 15, 1, 131089, 15, 1, 131090, 15, 1, 131091, 15, 2, 196622, 15, 65536, 196623, 15, 65537, 196624, 15, 65537, 196625, 15, 65537, 196626, 15, 65537, 196627, 15, 65538, 262158, 15, 65536, 262159, 15, 65537, 262160, 15, 65537, 262161, 15, 65537, 262162, 15, 65537, 262163, 15, 65538, 327694, 15, 131072, 327695, 15, 131073, 327696, 15, 131073, 327697, 15, 131073, 327698, 15, 131073, 327699, 15, 131074, 458765, 10, 0, 589827, 17, 0, 655364, 17, 0, 720902, 2, 0, 720906, 2, 0, 786438, 2, 0, 786442, 2, 0, 851974, 2, 0, 851978, 2, 0, 917510, 2, 0, 917514, 2, 0, 983046, 2, 0, 983050, 2, 0, 1048582, 4, 0, 1048583, 4, 0, 1048584, 4, 0, 1048585, 4, 0, 1048586, 4, 0 )

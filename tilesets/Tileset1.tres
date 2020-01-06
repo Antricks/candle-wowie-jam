@@ -8,35 +8,37 @@
 [ext_resource path="res://assets/roof1.png" type="Texture" id=6]
 [ext_resource path="res://assets/bricks2.png" type="Texture" id=7]
 [ext_resource path="res://assets/crate_top1.png" type="Texture" id=8]
-[ext_resource path="res://assets/Flammen-Charakter.png" type="Texture" id=9]
-[ext_resource path="res://assets/double_slab_stone1.png" type="Texture" id=10]
-[ext_resource path="res://assets/arrow_down1.png" type="Texture" id=11]
-[ext_resource path="res://assets/arrow_up11.png" type="Texture" id=12]
-[ext_resource path="res://assets/double_slab_stone1_light.png" type="Texture" id=13]
-[ext_resource path="res://assets/half_slab_stone1.png" type="Texture" id=14]
-[ext_resource path="res://assets/window1.png" type="Texture" id=15]
-[ext_resource path="res://assets/fence1.png" type="Texture" id=16]
+[ext_resource path="res://assets/double_slab_stone1.png" type="Texture" id=9]
+[ext_resource path="res://assets/arrow_down1.png" type="Texture" id=10]
+[ext_resource path="res://assets/arrow_up11.png" type="Texture" id=11]
+[ext_resource path="res://assets/double_slab_stone1_light.png" type="Texture" id=12]
+[ext_resource path="res://assets/half_slab_stone1.png" type="Texture" id=13]
+[ext_resource path="res://assets/window1.png" type="Texture" id=14]
+[ext_resource path="res://assets/fence1.png" type="Texture" id=15]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 22.0944, 0, 22.0944 )
+points = PoolVector2Array( 0, 0, 16, 0, 16, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 8.95447, 0, 8.95447 )
+[sub_resource type="ConvexPolygonShape2D" id=11]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 9.07057, 0, 9.07057 )
+[sub_resource type="ConvexPolygonShape2D" id=12]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 0, 0, 16, 0, 15.9701, 2.96314, 0, 2.96314 )
+[sub_resource type="ConcavePolygonShape2D" id=7]
+segments = PoolVector2Array( 0, 0, 16, 0, 16, 0, 16, 0, 16, 0, 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0, 3.15695 )
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [resource]
 0/name = "bricks1.png 0"
@@ -51,7 +53,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 0/shapes = [  ]
 0/z_index = 0
 2/name = "double_slab_stone1.png 2"
-2/texture = ExtResource( 10 )
+2/texture = ExtResource( 9 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 16, 16 )
@@ -61,7 +63,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "double_slab_stone1_light.png 3"
-3/texture = ExtResource( 13 )
+3/texture = ExtResource( 12 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 8, 16, 8 )
@@ -71,7 +73,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "half_slab_stone1.png 4"
-4/texture = ExtResource( 14 )
+4/texture = ExtResource( 13 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 8, 16, 8 )
@@ -81,7 +83,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "window1.png 5"
-5/texture = ExtResource( 15 )
+5/texture = ExtResource( 14 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 0, 0, 16, 16 )
@@ -91,7 +93,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 5/shapes = [  ]
 5/z_index = 0
 8/name = "fence1.png 8"
-8/texture = ExtResource( 16 )
+8/texture = ExtResource( 15 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 0, 0, 48, 48 )
@@ -104,26 +106,32 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 8/autotile/occluder_map = [  ]
 8/autotile/navpoly_map = [  ]
 8/autotile/priority_map = [  ]
-8/autotile/z_index_map = [  ]
+8/autotile/z_index_map = [ Vector3( 0, 0, 1 ), Vector3( 0, 1, 1 ), Vector3( 1, 0, 1 ), Vector3( 1, 1, 1 ), Vector3( 2, 0, 1 ), Vector3( 2, 1, 1 ) ]
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
 8/shapes = [ {
-"autotile_coord": Vector2( 0, 2 ),
+"autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 1, 2 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 8/z_index = 0
@@ -175,7 +183,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 13/z_index = 0
@@ -220,7 +228,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 12 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 16/z_index = 0
@@ -234,16 +242,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 17/navigation_offset = Vector2( 0, 0 )
 17/shapes = [  ]
 17/z_index = 0
-18/name = "Sprite"
-18/texture = ExtResource( 9 )
-18/tex_offset = Vector2( 0, 0 )
-18/modulate = Color( 1, 1, 1, 1 )
-18/region = Rect2( 0, 0, 16, 16 )
-18/tile_mode = 0
-18/occluder_offset = Vector2( 8, 8 )
-18/navigation_offset = Vector2( 8, 8 )
-18/shapes = [  ]
-18/z_index = 0
 19/name = "wall_lantern1.png 19"
 19/texture = ExtResource( 2 )
 19/tex_offset = Vector2( 0, 0 )
@@ -255,7 +253,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 19/shapes = [  ]
 19/z_index = 0
 26/name = "arrow_down1.png 26"
-26/texture = ExtResource( 11 )
+26/texture = ExtResource( 10 )
 26/tex_offset = Vector2( 0, 0 )
 26/modulate = Color( 1, 1, 1, 1 )
 26/region = Rect2( 0, 0, 16, 16 )
@@ -265,7 +263,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 2.96314, 0.0560455, 2.96314 )
 26/shapes = [  ]
 26/z_index = 0
 27/name = "arrow_up11.png 27"
-27/texture = ExtResource( 12 )
+27/texture = ExtResource( 11 )
 27/tex_offset = Vector2( 0, 0 )
 27/modulate = Color( 1, 1, 1, 1 )
 27/region = Rect2( 0, 0, 16, 16 )

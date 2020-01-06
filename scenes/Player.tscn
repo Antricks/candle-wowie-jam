@@ -113,11 +113,7 @@ func _on_InvulnerableTimer_timeout():
 	$Sprite/AnimationPlayer3.stop();
 "
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 7.43602
-height = 23.1439
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "hover"
 length = 2.0
 loop = true
@@ -140,11 +136,11 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -34, -0.25, 0, 0.25, 0, -20, -0.25, 0, 0.25, 0, -34, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -27, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -27, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1, 2 )
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "invulnerable"
 length = 2.0
 loop = true
@@ -161,15 +157,19 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.465147 ), Color( 1, 1, 1, 0.95385 ), Color( 1, 1, 1, 0.447059 ), Color( 1, 1, 1, 0.910019 ) ]
 }
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 7.43602
+height = 6.77356
+
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0 )
 colors = PoolColorArray( 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
 [node name="Player" type="KinematicBody2D"]
 script = SubResource( 1 )
@@ -184,10 +184,6 @@ margin_right = 781.0
 margin_bottom = 560.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -34 )
-shape = SubResource( 2 )
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
@@ -199,10 +195,14 @@ hframes = 4
 anims/idle = ExtResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
-anims/hover = SubResource( 4 )
+anims/hover = SubResource( 2 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Sprite"]
-anims/invulnerable = SubResource( 5 )
+anims/invulnerable = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -27 )
+shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 4096
@@ -215,9 +215,9 @@ drag_margin_bottom = 0.0
 
 [node name="ShaderSprite" type="Sprite" parent="Camera2D"]
 visible = false
-material = SubResource( 6 )
+material = SubResource( 5 )
 z_index = 4096
-texture = SubResource( 8 )
+texture = SubResource( 7 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1380, 800 )
 
