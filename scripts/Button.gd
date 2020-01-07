@@ -5,7 +5,7 @@ export var btnText : String
 # export var functionToDo : String
 
 func _ready():
-	$Label.text = btnText
+	$CenterContainer/Label.text = btnText
 
 # DAS WAR MEGA UNNÖTIG, MAN KANN EINFACH DAS SIGNAL pressed()
 # IN DEM HAUPTSCRIPT VERWENDEN, STATT TAUSENDE UNTERSCHIEDLICHE FUNKTIONEN

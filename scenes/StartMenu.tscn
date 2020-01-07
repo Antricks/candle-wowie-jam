@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/BGdark.png" type="Texture" id=2]
@@ -7,8 +7,7 @@
 [ext_resource path="res://animations/Parallax.tres" type="Animation" id=5]
 [ext_resource path="res://animations/FadeIn.tres" type="Animation" id=6]
 [ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://fonts/coders-crux-2.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://assets/title.png" type="Texture" id=9]
+[ext_resource path="res://assets/title.png" type="Texture" id=8]
 
 [sub_resource type="Gradient" id=1]
 
@@ -33,7 +32,7 @@ scale = 0.1
 [sub_resource type="Animation" id=4]
 resource_name = "fadeOut"
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayButton:modulate")
+tracks/0/path = NodePath("CenterContainer/title:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -44,22 +43,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CenterContainer/title:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="DynamicFont" id=5]
-size = 41
-font_data = ExtResource( 8 )
 
 [sub_resource type="Animation" id=6]
 length = 0.4
@@ -90,6 +73,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 3, 14 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../PlayButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 0.148651, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../PlayButton:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.0166667, 0.7 ),
+"transitions": PoolRealArray( 0.153893, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ) ]
 }
 
 [node name="StartMenu" type="Node2D"]
@@ -148,6 +155,7 @@ anims/fadeIn = ExtResource( 6 )
 anims/fadeOut = SubResource( 4 )
 
 [node name="PlayButton" parent="Cam/GUI" instance=ExtResource( 7 )]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -156,10 +164,16 @@ margin_left = -175.0
 margin_top = -265.0
 margin_right = 175.0
 margin_bottom = -151.0
+rect_scale = Vector2( 1.1141, 1.1141 )
+rect_pivot_offset = Vector2( 179.838, 53.9819 )
 btnText = "Play"
 
-[node name="Label" parent="Cam/GUI/PlayButton" index="0"]
-custom_fonts/font = SubResource( 5 )
+[node name="Label" parent="Cam/GUI/PlayButton/CenterContainer" index="0"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 109.0
+margin_top = 40.0
+margin_right = 240.0
+margin_bottom = 74.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Cam/GUI"]
 anchor_left = 0.5
@@ -167,10 +181,11 @@ anchor_right = 0.5
 margin_top = 100.0
 
 [node name="title" type="Sprite" parent="Cam/GUI/CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
 scale = Vector2( 6.64939, 6.64939 )
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 vframes = 15
-frame = 4
+frame = 3
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/CenterContainer/title"]
 anims/titleIDLE = SubResource( 6 )
