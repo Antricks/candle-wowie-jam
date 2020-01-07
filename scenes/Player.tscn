@@ -37,7 +37,6 @@ func _ready():
 	transitioning = false;
 
 func _process(delta):
-	$Camera2D/UI/MainContainer/Sprite.frame = lifes if lifes >= 0 else 0;
 	if !transitioning && Input.is_action_pressed(\"right\") || Input.is_action_pressed(\"left\"):
 		$Sprite.flip_h = Input.is_action_pressed(\"left\");
 	
@@ -100,6 +99,7 @@ func handle_damage():
 		vulnerable = false;
 		$Sprite/AnimationPlayer3.play(\"invulnerable\");
 		lifes -= 1;
+		$Camera2D/UI/MainContainer/LifeSprite.damaged(lifes)
 		$\"/root/Global\".save_player_lifes(lifes);
 		print(\"Lifes: \", lifes)
 		if not lifes:
