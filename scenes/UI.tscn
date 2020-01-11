@@ -5,6 +5,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends CanvasLayer
 
+var escapeMenu = preload(\"res://scenes/EscapeMenu.tscn\")
 
 func damaged(lifes):
 	$MainContainer/LifeSprite.frame = lifes if lifes >= 0 else 0;
@@ -13,7 +14,13 @@ func damaged(lifes):
 func heal(lifes):
 	$MainContainer/LifeSprite.frame = lifes
 	#$MainContainer/LifeSprite/AnimationPlayer.play(\"healed\") #Animation noch nicht vorhanden
-"
+
+######
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_ESCAPE:
+			add_child(escapeMenu.instance())"
 
 [sub_resource type="Animation" id=2]
 resource_name = "damaged"

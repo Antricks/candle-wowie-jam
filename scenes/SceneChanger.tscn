@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 script/source = "extends CanvasLayer
 
 signal scene_changed();
@@ -31,7 +31,7 @@ tracks/0/keys = {
 }
 
 [node name="SceneChanger" type="CanvasLayer"]
-script = SubResource( 3 )
+script = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -181.852

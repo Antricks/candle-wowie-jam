@@ -14,6 +14,7 @@ font_data = ExtResource( 5 )
 margin_right = 200.0
 margin_bottom = 70.0
 rect_pivot_offset = Vector2( 100, 35 )
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )

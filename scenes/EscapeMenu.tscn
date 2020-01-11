@@ -1,0 +1,129 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/PausedTitle.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends CanvasLayer
+
+var closed = false
+
+func _ready():
+	$AnimationPlayer.play(\"Fade\")
+	get_tree().paused = true
+
+
+func _on_Button_pressed():
+	closed = true
+	$AnimationPlayer.play_backwards(\"Fade\")
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if closed:
+		get_tree().paused = false
+		self.queue_free()
+		print(\"killed\")
+
+
+func _on_Button2_pressed():
+	get_tree().paused = false
+	SceneChanger.change_scene(\"res://scenes/StartMenu.tscn\", 0);
+"
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fade"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("BackGround:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -5.65686, -5.09824 ),
+"update": 0,
+"values": [ Vector2( -20.5055, 613.113 ), Vector2( -20.5055, -12.8867 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, -2, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PausedTitle:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7, 1.4 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Button2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9, 1.6 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="EscapeMenu" type="CanvasLayer"]
+pause_mode = 2
+script = SubResource( 2 )
+
+[node name="BackGround" type="ColorRect" parent="."]
+margin_left = -20.5055
+margin_top = -12.8867
+margin_right = 1065.49
+margin_bottom = 611.115
+color = Color( 0, 0, 0, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade = SubResource( 1 )
+
+[node name="Button" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -118.5
+margin_top = -291.0
+margin_right = 118.5
+margin_bottom = -208.0
+rect_pivot_offset = Vector2( 119.36, 40.7245 )
+btnText = "Resume"
+
+[node name="Button2" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -118.5
+margin_top = -199.0
+margin_right = 118.5
+margin_bottom = -116.0
+rect_pivot_offset = Vector2( 119.36, 40.7245 )
+btnText = "Restart"
+
+[node name="PausedTitle" type="Sprite" parent="."]
+position = Vector2( 521.458, 138.815 )
+scale = Vector2( 7.81619, 7.81619 )
+texture = ExtResource( 2 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
