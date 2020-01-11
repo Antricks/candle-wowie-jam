@@ -135,8 +135,8 @@ texture = ExtResource( 3 )
 stream = ExtResource( 4 )
 
 [node name="Cam" type="Camera2D" parent="."]
-position = Vector2( 516.76, 300 )
-rotation = -0.00804248
+position = Vector2( 556, 300 )
+rotation = 0.0523599
 scale = Vector2( 0.958428, 1.49736 )
 rotating = true
 current = true

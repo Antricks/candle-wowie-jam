@@ -33,6 +33,7 @@ LEVEL_ID = 1
 
 [node name="TileMapFloor" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
+z_index = -2
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
