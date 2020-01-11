@@ -103,6 +103,7 @@ tile_data = PoolIntArray( 720903, 8, 0, 720904, 8, 1, 720905, 8, 2, 786439, 8, 6
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 515.147, 299.685 )
+fog_active = true
 
 [node name="Lantern" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 71.5561, 527.426 )

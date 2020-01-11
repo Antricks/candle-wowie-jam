@@ -44,7 +44,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -60,7 +60,7 @@ tracks/0/keys = {
 "values": [ 0, 4 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -188,8 +188,8 @@ vframes = 15
 frame = 3
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Cam/GUI/CenterContainer/title"]
-anims/titleIDLE = SubResource( 6 )
-anims/titlePLAY = SubResource( 7 )
+anims/titleIDLE = SubResource( 5 )
+anims/titlePLAY = SubResource( 6 )
 [connection signal="pressed" from="Cam/GUI/PlayButton" to="." method="_on_PlayButton_pressed"]
 
 [editable path="Cam/GUI/PlayButton"]
