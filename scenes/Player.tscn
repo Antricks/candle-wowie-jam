@@ -81,7 +81,7 @@ func shoot(goal):
 	var projectile = bullet.instance();
 	projectile.speed = 300
 	projectile.friendly = true;
-	projectile.scale = Vector2(2,2);
+	projectile.scale = Vector2(1.5,1.5);
 	projectile.position = position+Vector2(0,-32);
 	projectile.set_target_position(goal);
 	self.get_parent().add_child(projectile);

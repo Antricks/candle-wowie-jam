@@ -42,5 +42,5 @@ void fragment() {
 	vec3 blurred = texture(SCREEN_TEXTURE, SCREEN_UV, blur).rgb;
 	
 	COLOR = vec4(blurred,noise);
-	COLOR.rgb += vec3(noise*0.4);
+	COLOR.rgb += vec3(noise*0.3);
 }
