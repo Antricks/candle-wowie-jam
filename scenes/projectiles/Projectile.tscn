@@ -43,7 +43,7 @@ func _on_Area2D_body_entered(body):
 func _is_projectile():
 	return true;"
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "hit"
 length = 0.1
 tracks/0/type = "value"
@@ -59,10 +59,10 @@ tracks/0/keys = {
 "values": [ 0, 5 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 4.43946
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 3.69569
 
 [node name="Projectile" type="KinematicBody2D"]
@@ -76,13 +76,13 @@ texture = ExtResource( 1 )
 hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/hit = SubResource( 4 )
+anims/hit = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2.60437, 0.0986001 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="LifeTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -91,7 +91,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2.61941, 0.166312 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
