@@ -33,6 +33,7 @@ func _ready():
 		lifes = $\"/root/Global\".get_player_lifes();
 	else:
 		$\"/root/Global\".save_player_lifes(lifes);
+	$Camera2D/UI/MainContainer/LifeSprite.frame = lifes if lifes >= 0 else 0;
 	transitioning = false;
 
 func _process(delta):
@@ -98,7 +99,7 @@ func handle_damage():
 		vulnerable = false;
 		$Sprite/AnimationPlayer3.play(\"invulnerable\");
 		lifes -= 1;
-		$Camera2D/UI/MainContainer/LifeSprite.damaged(lifes)
+		$Camera2D/UI.damaged(lifes)
 		$\"/root/Global\".save_player_lifes(lifes);
 		print(\"Lifes: \", lifes)
 		if not lifes:

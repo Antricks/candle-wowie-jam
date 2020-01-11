@@ -3,13 +3,13 @@
 [ext_resource path="res://shader/fog.shader" type="Shader" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/blur = 0.7
 shader_param/OCTAVES = 3
 
 [node name="Sprite" type="Sprite"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 565.891, 410.903 )
 scale = Vector2( 223.2, 135.492 )
 z_index = 1
