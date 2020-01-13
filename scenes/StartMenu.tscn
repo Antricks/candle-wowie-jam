@@ -190,7 +190,6 @@ margin_right = 175.0
 margin_bottom = -151.0
 rect_scale = Vector2( 1.0978, 1.0978 )
 rect_pivot_offset = Vector2( 179.838, 53.9819 )
-mouse_default_cursor_shape = 2
 btnText = "Play"
 
 [node name="Label" parent="Cam/GUI/PlayButton/CenterContainer" index="0"]
