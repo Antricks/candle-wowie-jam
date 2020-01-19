@@ -54,7 +54,7 @@ tracks/0/keys = {
 script = SubResource( 1 )
 
 [node name="vignette" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.768627 )
+modulate = Color( 0.772549, 0.772549, 0.776471, 0.72549 )
 position = Vector2( 510.633, 302.125 )
 scale = Vector2( 0.584982, 0.508958 )
 texture = ExtResource( 1 )
