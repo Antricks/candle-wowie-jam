@@ -1,5 +1,8 @@
 extends Node
 
+const const_door_count_tutorial_max = 4;
+var door_count = 0;
+
 var playerNodePath
 var player_node
 var player_position : Vector2; 

@@ -133,17 +133,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -3 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../CollisionShape2D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -27, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -27, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 2 )
+"values": [ Vector2( 0, -3 ), Vector2( 0, -2 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -165,7 +155,7 @@ tracks/0/keys = {
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 7.43602
-height = 6.77356
+height = 13.381
 
 [node name="Player" type="KinematicBody2D"]
 script = SubResource( 1 )
@@ -191,7 +181,7 @@ texture = ExtResource( 1 )
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
-offset = Vector2( 0, -2.1675 )
+offset = Vector2( 0, -2.00904 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
@@ -204,7 +194,7 @@ anims/hover = SubResource( 2 )
 anims/invulnerable = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -23.1093 )
+position = Vector2( -0.440125, -26.8963 )
 shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/key-spritesheet.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends StaticBody2D
+
+export var key_type = 0;
+
+func _ready():
+	pass
+
+func collect(body):
+	body.on_key_collected(key_type);"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.69383, 3.64869 )
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 3
