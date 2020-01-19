@@ -37,10 +37,10 @@ float fbm(vec2 coord){
 void fragment() {
 	vec2 coord = UV * 4.0;
 	
-	float noise = fbm(coord + vec2(TIME*0.1));
+	float noise_texture = fbm(coord + vec2(TIME*0.1));
 	
 	vec3 blurred = texture(SCREEN_TEXTURE, SCREEN_UV, blur).rgb;
 	
-	COLOR = vec4(blurred,noise);
-	COLOR.rgb += vec3(noise*0.6);
+	COLOR = vec4(blurred,noise_texture);
+	COLOR.rgb += vec3(noise_texture*0.6);
 }
