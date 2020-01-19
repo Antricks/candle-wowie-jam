@@ -248,7 +248,7 @@ texture = ExtResource( 2 )
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
-offset = Vector2( 0, -2.00904 )
+offset = Vector2( 0, -3 )
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
