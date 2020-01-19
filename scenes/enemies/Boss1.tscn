@@ -23,7 +23,7 @@ func _on_shot():
 	self.queue_free();
 
 func _on_Timer_timeout():
-	shoot(Global.player_node.position);
+	shoot(Global.player_node.position);	#???
 
 func shoot(goal):
 	var projectile = bullet.instance();
