@@ -70,18 +70,21 @@ position = Vector2( 36, 240 )
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
+format = 1
 tile_data = PoolIntArray( 1048582, 8, 0, 1048583, 8, 1, 1048584, 8, 2, 1114118, 8, 131072, 1114119, 8, 131073, 1114120, 8, 131074 )
 
 [node name="FenceTileMap1" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
+format = 1
 tile_data = PoolIntArray( 720936, 8, 0, 720937, 8, 1, 720938, 8, 2, 786472, 8, 131072, 786473, 8, 131073, 786474, 8, 131074, 851977, 16, 0, 851978, 16, 0, 851979, 16, 0, 851980, 16, 0, 851981, 16, 0 )
 
 [node name="FenceTileMap2" type="TileMap" parent="YSort"]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
+format = 1
 tile_data = PoolIntArray( 786438, 8, 0, 786439, 8, 1, 786440, 8, 2, 851974, 8, 131072, 851975, 8, 131073, 851976, 8, 131074 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]

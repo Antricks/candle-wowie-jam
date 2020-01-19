@@ -10,7 +10,7 @@ var velocity = Vector2()
 var friendly = false;
 var has_hit = false;
 
-onready var target_position : Vector2;
+var target_position : Vector2;
 
 func set_target_position(_target_position):
 	target_position = _target_position;
