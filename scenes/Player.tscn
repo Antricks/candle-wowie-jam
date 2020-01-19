@@ -216,12 +216,13 @@ extents = Vector2( 8.24902, 14.7185 )
 script = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0.217651, -50.5402 )
-scale = Vector2( 2.86031, 7.53736 )
+position = Vector2( 0.217651, -41.265 )
+scale = Vector2( 2.86031, 5.72579 )
 texture = ExtResource( 1 )
 texture_scale = 0.01
 color = Color( 0.6, 0.898039, 0.313726, 1 )
-energy = 0.659495
+energy = 0.0652
+range_z_max = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Light2D"]
 autoplay = "lightPulse"
