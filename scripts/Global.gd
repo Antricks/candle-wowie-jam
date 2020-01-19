@@ -9,7 +9,11 @@ var player_position : Vector2;
 var player_init_position : Vector2;
 var player_lifes : int;
 
+var keys = [];
+
 var level_solved_switches = [false,false,false,false,false,false,false,false,false];
+var key_collected_switches = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+var door_unlocked_switches = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
 
 func reset():
 	level_solved_switches = [false,false,false,false,false,false,false,false,false];

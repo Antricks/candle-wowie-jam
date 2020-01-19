@@ -34,6 +34,7 @@ LEVEL_ID = 2
 
 [node name="TileMapFloor" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
+z_index = -2
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -60,6 +61,7 @@ position = Vector2( 31.7924, 128.208 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/level-scenes/Level1.tscn"
 position_goal = Vector2( 36, 240 )
+id = 3
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 36, 240 )

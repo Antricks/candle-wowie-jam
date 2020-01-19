@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/level-objects/StaticLight.tscn" type="PackedScene" id=2]
@@ -8,7 +8,8 @@
 [ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/enemies/GhostHand.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/enemies/GhostHelmet.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/fog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/level-objects/Key.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/fog.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -22,7 +23,6 @@ onready var item3 = $YSort/Light3
 
 func _ready():
 	solved = $\"/root/Global\".level_solved_switches[LEVEL_ID];
-	print(\"is level solved - \", LEVEL_ID, \" - \", solved);
 	level_logic(solved);
 
 func level_logic(_solved = false):
@@ -85,7 +85,6 @@ format = 1
 tile_data = PoolIntArray( 131082, 1610612765, 0, 131083, 1610612765, 0, 131084, 1610612765, 0, 131085, 1610612765, 0, 131086, 1610612765, 0, 196618, -1610612706, 0, 196619, 29, 0, 196620, 29, 0, 196621, 29, 0, 196622, 29, 0, 262158, 29, 0, 262165, -1073741794, 0, 327700, -1610612705, 0, 327701, -1073741795, 0, 393236, 28, 0, 393237, 30, 0, 458766, 1610612765, 0, 458767, 1610612765, 0, 458768, 1610612765, 0, 458770, 1610612765, 0, 458771, 1610612765, 0, 458772, -1073741795, 0, 524302, -1610612706, 0, 524303, 29, 0, 524304, 29, 0, 524305, 29, 0, 524306, 29, 0, 524307, 29, 0, 524308, 30, 0, 655363, 1610612765, 0, 655364, 1610612765, 0, 655365, -1073741794, 0, 720899, -1610612706, 0, 720900, 29, 0, 720901, 30, 0 )
 
 [node name="YSort" type="YSort" parent="."]
-editor/display_folded = true
 
 [node name="Light1" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 212.507, 166.97 )
@@ -97,7 +96,7 @@ wait_time = 3.0
 active_frame = 2
 
 [node name="Light3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 542.905, 939.919 )
+position = Vector2( 585.076, 939.919 )
 max_status = 1
 
 [node name="FenceTileMap1" type="TileMap" parent="YSort"]
@@ -118,12 +117,16 @@ position = Vector2( 1119.97, 448.065 )
 scale = Vector2( 4, 4 )
 scene_path = "res://scenes/level-scenes/Level1.tscn"
 position_goal = Vector2( 360, 110 )
+locked = true
 
 [node name="GhostHand" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 475.428, 382.649 )
 
 [node name="GhostHelmet" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 1331.77, 613.004 )
+
+[node name="Key" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 500.073, 945.736 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
 scale = Vector2( 4, 4 )
@@ -147,4 +150,4 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 65545, 9, 0, 131086, 15, 0, 131087, 15, 1, 131088, 15, 1, 131089, 15, 1, 131090, 15, 1, 131091, 15, 2, 196622, 15, 65536, 196623, 15, 65537, 196624, 15, 65537, 196625, 15, 65537, 196626, 15, 65537, 196627, 15, 65538, 262158, 15, 65536, 262159, 15, 65537, 262160, 15, 65537, 262161, 15, 65537, 262162, 15, 65537, 262163, 15, 65538, 327694, 15, 131072, 327695, 15, 131073, 327696, 15, 131073, 327697, 15, 131073, 327698, 15, 131073, 327699, 15, 131074, 458765, 10, 0, 589827, 17, 0, 655364, 17, 0, 720902, 2, 0, 720906, 2, 0, 786438, 2, 0, 786442, 2, 0, 851974, 2, 0, 851978, 2, 0, 917510, 2, 0, 917514, 2, 0, 983046, 2, 0, 983050, 2, 0, 1048582, 4, 0, 1048583, 4, 0, 1048584, 4, 0, 1048585, 4, 0, 1048586, 4, 0 )
 
-[node name="fog" parent="." instance=ExtResource( 9 )]
+[node name="fog" parent="." instance=ExtResource( 10 )]

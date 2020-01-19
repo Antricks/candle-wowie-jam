@@ -5,23 +5,30 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
 
-export var key_type = 0;
+export (int) var key_type = 0;
+export (int) var id;
 
 func _ready():
-	pass
+	if(Global.key_collected_switches[id]):
+		self.queue_free();
+	$Sprite.frame = key_type;
 
 func collect(body):
-	body.on_key_collected(key_type);"
+	if body.on_key_collected(key_type):
+		Global.key_collected_switches[id] = true;
+		self.queue_free();"
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5.69383, 3.64869 )
+extents = Vector2( 5.44746, 1.5328 )
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="Key" type="StaticBody2D"]
+scale = Vector2( 4, 4 )
 script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.594566, 0 )
 texture = ExtResource( 1 )
 hframes = 3

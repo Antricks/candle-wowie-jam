@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://assets/door1.png" type="Texture" id=2]
 [ext_resource path="res://assets/keyboard_E1.png" type="Texture" id=3]
+[ext_resource path="res://assets/key-spritesheet.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.5
@@ -68,14 +69,19 @@ wait_time = 0.2
 one_shot = true
 
 [node name="press_E_indicator" type="Sprite" parent="."]
-visible = false
-position = Vector2( 17.0661, 6.37922 )
-scale = Vector2( 0.50175, 0.50175 )
+position = Vector2( 15.6461, 6.47366 )
+scale = Vector2( 0.560917, 0.533277 )
 z_index = 2
 texture = ExtResource( 3 )
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="press_E_indicator"]
 anims/idle = SubResource( 4 )
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+[node name="locked_indicator" type="Sprite" parent="."]
+visible = false
+position = Vector2( 15.5454, -2.40821 )
+scale = Vector2( 0.704165, 0.704165 )
+texture = ExtResource( 4 )
+hframes = 3
 [connection signal="timeout" from="PressingTimer" to="." method="_on_PressingTimer_timeout"]

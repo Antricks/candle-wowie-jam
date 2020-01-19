@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/key-spritesheet.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+export (int) var key_type = 0;
+
+func _ready():
+	$Sprite.frame = key_type;"
+
+[node name="Key" type="Node2D"]
+scale = Vector2( 4, 4 )
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.594566, 0 )
+texture = ExtResource( 1 )
+hframes = 3

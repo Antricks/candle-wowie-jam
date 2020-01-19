@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/entity_shadow.png" type="Texture" id=1]
 [ext_resource path="res://assets/Flammen-Charakter.png" type="Texture" id=2]
@@ -15,7 +15,8 @@ var bullet = preload(\"res://scenes/projectiles/Projectile.tscn\")
 export (int) var MAX_SPEED = 250;
 export (int) var ACCELERATION = 4000;
 export (float) var MULTIPLIER = 1;
-export (int) var lifes = 6;
+var MAX_LIFES = 6;
+var lifes = MAX_LIFES;
 
 onready var camera = $Camera2D;
 
@@ -23,6 +24,8 @@ var velocity = Vector2();
 var transitioning = false;
 var able_to_shoot = true;
 var vulnerable = true;
+
+var keys = [];
 
 func _ready():
 	$Sprite/AnimationPlayer.play(\"idle\");
@@ -35,6 +38,10 @@ func _ready():
 		$\"/root/Global\".save_player_lifes(lifes);
 	$Camera2D/UI/MainContainer/LifeSprite.frame = lifes if lifes >= 0 else 0;
 	transitioning = false;
+	keys = Global.keys;
+	$Camera2D/UI.draw_keys();
+	print(\"local keys:\", keys)
+	print(\"global keys:\", Global.keys);
 
 func _process(delta):
 	if !transitioning && Input.is_action_pressed(\"right\") || Input.is_action_pressed(\"left\"):
@@ -50,6 +57,9 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity * Vector2(MULTIPLIER,MULTIPLIER));
 	else:
 		move_and_slide(Vector2(0,-150));
+	for body in $CollectionArea.get_overlapping_bodies():
+		if body.has_method(\"collect\"):
+			body.collect(self);
 	
 func get_input_axis():
 	var axis = Vector2.ZERO
@@ -93,12 +103,12 @@ func _input(event):
 		if able_to_shoot:
 			shoot(game_field_position);
 		
-func handle_damage():
+func handle_damage(var amount = 1):
 	if vulnerable:
 		$InvulnerableTimer.start();
 		vulnerable = false;
 		$Sprite/AnimationPlayer3.play(\"invulnerable\");
-		lifes -= 1;
+		lifes -= amount;
 		$Camera2D/UI.damaged(lifes)
 		$\"/root/Global\".save_player_lifes(lifes);
 		print(\"Lifes: \", lifes)
@@ -117,7 +127,33 @@ func _game_over():
 	emit_signal(\"game_over\");
 	$\"/root/Global\".reset();
 	$\"/root/SceneChanger\".change_scene(\"res://scenes/GameOver.tscn\",0);
-"
+	
+func on_key_collected(var key_type):
+	keys.append(key_type);
+	Global.keys = keys;
+	print(\"local keys:\", keys)
+	print(\"global keys:\", Global.keys);
+	$Camera2D/UI.draw_keys();
+	return true;
+
+func try_unlock_door(var door):
+	if door.key_type in keys:
+		drop_key(door.key_type);
+		door.unlock();
+		return true;
+
+func drop_key(var key_type):
+	for i in range(keys.size()):
+		if keys[i] == key_type:
+			keys.remove(i)
+			print(\"DROPPED KEY: \", key_type, \" - INDEX: \", i)
+			break;
+	Global.keys = keys;
+	$Camera2D/UI.draw_keys();
+	
+func on_heart_collected():
+	if lifes < MAX_LIFES:
+		handle_damage(-1);"
 
 [sub_resource type="Animation" id=2]
 resource_name = "hover"
@@ -156,6 +192,9 @@ tracks/0/keys = {
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 7.43602
 height = 13.381
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8.24902, 14.7185 )
 
 [node name="Player" type="KinematicBody2D"]
 script = SubResource( 1 )
@@ -196,6 +235,7 @@ anims/invulnerable = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.440125, -26.8963 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 4096
@@ -215,6 +255,12 @@ one_shot = true
 [node name="AbleToShootTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="CollectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+position = Vector2( 0.0802631, -26.9796 )
+shape = SubResource( 5 )
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
 [connection signal="timeout" from="AbleToShootTimer" to="." method="_on_AbleToShootTimer_timeout"]
