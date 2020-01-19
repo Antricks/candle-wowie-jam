@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tilesets/Tileset1.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/level-objects/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
@@ -65,7 +65,6 @@ id = 2
 position = Vector2( 360, 110 )
 
 [node name="TileMapOverlay" type="TileMap" parent="."]
-visible = false
 scale = Vector2( 4, 4 )
 z_index = 4095
 tile_set = ExtResource( 1 )
