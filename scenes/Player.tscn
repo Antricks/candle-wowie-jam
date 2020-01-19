@@ -156,7 +156,7 @@ func on_heart_collected():
 	if lifes < MAX_LIFES:
 		handle_damage(-1);"
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 resource_name = "lightPulse"
 length = 3.0
 loop = true
@@ -173,8 +173,7 @@ tracks/0/keys = {
 "values": [ 0.01, 0.7 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "hover"
+[sub_resource type="Animation" id=3]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -190,8 +189,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -3 ), Vector2( 0, -2 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "invulnerable"
+[sub_resource type="Animation" id=4]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -207,11 +205,11 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.465147 ), Color( 1, 1, 1, 0.95385 ), Color( 1, 1, 1, 0.447059 ), Color( 1, 1, 1, 0.910019 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 7.43602
 height = 13.381
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8.24902, 14.7185 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -227,7 +225,7 @@ energy = 0.659495
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Light2D"]
 autoplay = "lightPulse"
-anims/lightPulse = SubResource( 6 )
+anims/lightPulse = SubResource( 2 )
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
@@ -257,14 +255,14 @@ hframes = 4
 anims/idle = ExtResource( 4 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite"]
-anims/hover = SubResource( 2 )
+anims/hover = SubResource( 3 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Sprite"]
-anims/invulnerable = SubResource( 3 )
+anims/invulnerable = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.440125, -26.8963 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -290,7 +288,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
 position = Vector2( 0.0802631, -26.9796 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
 [connection signal="timeout" from="AbleToShootTimer" to="." method="_on_AbleToShootTimer_timeout"]
