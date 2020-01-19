@@ -121,7 +121,11 @@ script = SubResource( 2 )
 anims/hover = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Head"]
+<<<<<<< HEAD
+position = Vector2( -0.17271, 0.493771 )
+=======
 position = Vector2( -0.144096, 0.693615 )
+>>>>>>> 6cbbbd8602bce8f4fe11f70bacee309a4866e123
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
@@ -136,7 +140,11 @@ autoplay = "hover"
 anims/hover = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="LeftHand"]
+<<<<<<< HEAD
+position = Vector2( -0.191023, 0.365869 )
+=======
 position = Vector2( -0.1575, 0.6 )
+>>>>>>> 6cbbbd8602bce8f4fe11f70bacee309a4866e123
 texture = ExtResource( 2 )
 hframes = 2
 
@@ -155,10 +163,16 @@ anims/idle = SubResource( 8 )
 anims/hover = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="RightHand"]
+<<<<<<< HEAD
+position = Vector2( -0.31288, -0.48519 )
+texture = ExtResource( 3 )
+hframes = 5
+=======
 position = Vector2( -0.315, -0.5 )
 texture = ExtResource( 3 )
 hframes = 5
 frame = 4
+>>>>>>> 6cbbbd8602bce8f4fe11f70bacee309a4866e123
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightHand"]
 position = Vector2( -0.995399, 6.96778 )
