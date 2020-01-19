@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/light.png" type="Texture" id=1]
 [ext_resource path="res://assets/entity_shadow.png" type="Texture" id=2]
@@ -157,7 +157,7 @@ func on_heart_collected():
 		handle_damage(-1);"
 
 [sub_resource type="Animation" id=2]
-resource_name = "lightPulse"
+resource_name = "hover"
 length = 3.0
 loop = true
 tracks/0/type = "value"
@@ -170,26 +170,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( -2, -2 ),
 "update": 0,
-"values": [ 0.01, 0.7 ]
+"values": [ 0.3, 0.6 ]
 }
 
 [sub_resource type="Animation" id=3]
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -3 ), Vector2( 0, -2 ) ]
-}
-
-[sub_resource type="Animation" id=4]
+resource_name = "invulnerable"
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -205,23 +190,24 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.465147 ), Color( 1, 1, 1, 0.95385 ), Color( 1, 1, 1, 0.447059 ), Color( 1, 1, 1, 0.910019 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 7.43602
-height = 13.381
-
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8.24902, 14.7185 )
 
 [node name="Player" type="KinematicBody2D"]
 script = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0.217651, -50.5402 )
-scale = Vector2( 2.86031, 7.53736 )
+position = Vector2( 0.968689, -18.8467 )
+scale = Vector2( 4.26768, 7.51197 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -3 )
 texture_scale = 0.01
 color = Color( 0.6, 0.898039, 0.313726, 1 )
-energy = 0.659495
+energy = 0.3
+range_z_max = 0
+shadow_enabled = true
+shadow_filter = 5
+shadow_filter_smooth = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Light2D"]
 autoplay = "lightPulse"
@@ -245,6 +231,7 @@ z_index = -1
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.906644 )
 position = Vector2( 0.217651, -35.5402 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
@@ -258,11 +245,10 @@ anims/idle = ExtResource( 4 )
 anims/hover = SubResource( 3 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Sprite"]
-anims/invulnerable = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.440125, -26.8963 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 one_way_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -288,7 +274,6 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
 position = Vector2( 0.0802631, -26.9796 )
-shape = SubResource( 6 )
 [connection signal="tree_entered" from="." to="." method="_on_Player_tree_entered"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
 [connection signal="timeout" from="AbleToShootTimer" to="." method="_on_AbleToShootTimer_timeout"]
