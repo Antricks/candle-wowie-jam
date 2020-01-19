@@ -98,7 +98,7 @@ script = SubResource( 9 )
 anims/hover = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Head"]
-position = Vector2( -0.312034, -0.479283 )
+position = Vector2( -0.00186828, 1.68695 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
@@ -127,7 +127,7 @@ anims/idle = SubResource( 4 )
 anims/hover = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="RightHand"]
-position = Vector2( -0.305667, -0.43482 )
+position = Vector2( -0.0200684, 1.55984 )
 texture = ExtResource( 3 )
 hframes = 5
 frame = 2
