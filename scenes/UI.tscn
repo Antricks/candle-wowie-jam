@@ -53,14 +53,6 @@ tracks/0/keys = {
 [node name="UI" type="CanvasLayer"]
 script = SubResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0.2 )
-margin_left = -8.0
-margin_top = -4.0
-margin_right = 1039.0
-margin_bottom = 611.0
-color = Color( 0, 0, 0, 1 )
-
 [node name="vignette" type="Sprite" parent="."]
 modulate = Color( 0.772549, 0.772549, 0.776471, 0.72549 )
 position = Vector2( 510.633, 302.125 )
